@@ -1,0 +1,22 @@
+'use strict';
+
+import config from './eslint';
+import { includeIgnoreFile } from '@eslint/compat';
+import { FlatCompat } from '@eslint/eslintrc';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import tsESLint from 'typescript-eslint';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const compat = new FlatCompat({
+    baseDirectory: __dirname
+});
+
+const gitignore = resolve(__dirname, '.gitignore');
+
+export default tsESLint.config([
+    includeIgnoreFile(gitignore),
+    ...config(compat)
+]);

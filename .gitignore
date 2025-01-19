@@ -1,8 +1,8 @@
-node_modules
-
-/.cache
-/build
-.env
+**/.direnv/
 .dev.vars
-
-.wrangler
+.env
+.wrangler/
+.cache/
+build/
+node_modules/
+result/
