@@ -1,12 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@charset "UTF-8";
 
-html,
-body {
-    @apply bg-white dark:bg-gray-950;
+@import 'tailwindcss';
 
-    @media (prefers-color-scheme: dark) {
-        color-scheme: dark;
-    }
+@theme {
+    --font-sans: 'Noto Sans JP', 'Noto Sans CJK JP', 'Helvetica Neue', Helvetica, Arial, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, ui-sans-serif, system-ui, sans-serif, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }

@@ -1,22 +1,13 @@
 'use strict';
 
-import autoprefixerPlugin from 'autoprefixer';
+import tailwindcss from '@tailwindcss/postcss';
 import cssnanoPlugin from 'cssnano';
-import importPlugin from 'postcss-import';
-import stylelint from 'stylelint';
-import tailwindcssPlugin from 'tailwindcss';
 
 /** @type {import('postcss-load-config').Config} */
 const config = {
     plugins: [
-        importPlugin({
-            plugins: [
-                stylelint
-            ]
-        }),
-        tailwindcssPlugin,
-        autoprefixerPlugin,
-        process.env['NODE_ENV'] && cssnanoPlugin
+        tailwindcss,
+        process.env['NODE_ENV'] === 'production' && cssnanoPlugin
     ],
     syntax: 'postcss-scss'
 };

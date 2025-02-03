@@ -1,19 +1,22 @@
 'use strict';
 
-import type { ESLintConfigParts } from './types';
 import js from '@eslint/js';
+import stylistic from '@stylistic/eslint-plugin';
 import { flatConfigs as importXConfigs } from 'eslint-plugin-import-x';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
 import { configs as tsConfigs } from 'typescript-eslint';
+import type { ESLintConfigParts } from './types';
 
-export const configs: ESLintConfigParts = (compat) => [
+export const configs: ESLintConfigParts = compat => [
     {
         extends: [
             js.configs.recommended,
             ...tsConfigs.recommended
         ]
     },
+    // eslint-disable-next-line import-x/no-named-as-default-member
+    stylistic.configs['recommended-flat'],
     importXConfigs.recommended,
     importXConfigs.typescript,
     importXConfigs.react,

@@ -1,60 +1,43 @@
 @charset "UTF-8";
 
-* {
-    @apply
-    box-border
-    m-0
-    p-0;
-}
+//noinspection CssInvalidAtRule
+@reference '../tailwind.css';
 
-html {
-    @apply
-    antialiased
-    bg-neutral-200
-    font-normal
-    font-sans
-    text-base
-    text-neutral-800;
-    @apply
-    dark:bg-neutral-800
-    dark:text-neutral-200;
-    color-scheme: light dark;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-}
+@layer base {
+    * {
+        @apply box-border m-0 p-0;
+    }
 
-html, body, #root {
-    @apply
-    max-w-[100dvw]
-    min-h-dvh
-    min-w-[100dvw]
-    overflow-x-hidden
-    place-items-center;
-}
+    html {
+        @apply antialiased font-normal font-sans text-base;
+        @apply bg-neutral-200 text-neutral-800;
+        @apply dark:bg-neutral-800 dark:text-neutral-200;
+        color-scheme: light dark;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+    }
 
-h1 {
-    @apply
-    font-bold
-    my-4
-    text-4xl;
-}
+    html, body, #root {
+        @apply max-w-[100dvw] min-h-dvh min-w-[100dvw] overflow-x-hidden place-items-center;
+    }
 
-p {
-    @apply mb-3;
-}
+    h1 {
+        @apply font-bold my-4 text-4xl;
+    }
 
-a {
-    @apply
-    font-medium
-    no-underline
-    text-blue-600;
-    @apply dark:text-blue-400;
+    p {
+        @apply mb-3;
+    }
 
-    &:is(:active, :focus, :hover) {
-        @apply
-        text-blue-800
-        transition-colors
-        underline;
-        @apply dark:text-blue-600;
+    a {
+        @apply font-medium no-underline;
+        @apply text-blue-600;
+        @apply dark:text-blue-400;
+
+        &:is(:active, :focus, :hover) {
+            @apply transition-colors underline;
+            @apply text-blue-800;
+            @apply dark:text-blue-600;
+        }
     }
 }

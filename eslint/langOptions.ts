@@ -1,9 +1,9 @@
 'use strict';
 
-import type { ESLintConfigParts } from './types';
 import globals from 'globals';
+import type { ESLintConfigParts } from './types';
 
-export const langOptions: ESLintConfigParts = (_) => [
+export const langOptions: ESLintConfigParts = _ => [
     {
         files: [
             '*.{js,ts}'

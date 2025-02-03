@@ -1,8 +1,12 @@
 'use strict';
 
+// eslint-disable-next-line import-x/order
 import './tailwind.css';
-import type { LinksFunction } from '@remix-run/cloudflare';
+
+// eslint-disable-next-line import-x/order
+import './index.scss';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import type { LinksFunction } from '@remix-run/cloudflare';
 import type { PropsWithChildren } from 'react';
 
 export const links: LinksFunction = () => [

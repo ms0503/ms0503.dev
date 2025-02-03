@@ -5,17 +5,12 @@ const config = {
     extends: [
         'stylelint-config-standard',
         'stylelint-config-standard-scss'
-        // 'stylelint-a11y/recommended'
     ],
     plugins: [
-        // 'stylelint-a11y',
         'stylelint-order',
         'stylelint-declaration-block-no-ignored-properties'
     ],
     rules: {
-        // 'a11y/font-size-is-readable': true,
-        // 'a11y/no-obsolete-attribute': true,
-        // 'a11y/no-obsolete-element': true,
         'alpha-value-notation': 'number',
         'color-hex-length': 'short',
         'length-zero-no-unit': true,
