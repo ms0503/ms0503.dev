@@ -40,6 +40,7 @@
         "app/**/*.ts",
         "app/**/*.tsx",
         "functions/**/*.ts",
-        "functions/**/*.tsx"
+        "functions/**/*.tsx",
+        "worker-configuration.d.ts"
     ]
 }
