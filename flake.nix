@@ -4,13 +4,32 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
       url = "github:hercules-ci/flake-parts";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    git-hooks = {
+      inputs = {
+        flake-compat.follows = "";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:cachix/git-hooks.nix";
+    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    systems = {
+      flake = false;
+      url = "github:nix-systems/default";
+    };
+    treefmt-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:numtide/treefmt-nix";
+    };
   };
   outputs =
-    inputs@{ flake-parts, ... }:
+    inputs@{ flake-parts, systems, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./treefmt.nix
+        ./git-hooks.nix
+      ];
       perSystem =
-        { pkgs, ... }:
+        { config, pkgs, ... }:
         {
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
@@ -18,16 +37,11 @@
               nodejs-slim
             ];
             shellHook = ''
-              PATH=$PWD/node_modules/.bin:$PATH
+              ${config.pre-commit.installationScript}
               yarn install
             '';
           };
         };
-      systems = [
-        "aarch64-darwin"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "x86_64-linux"
-      ];
+      systems = import systems;
     };
 }

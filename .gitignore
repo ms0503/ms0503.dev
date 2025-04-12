@@ -1,8 +1,10 @@
 **/.direnv/
+.cache/
 .dev.vars
 .env
+.pre-commit-config.yaml
+.react-router/
 .wrangler/
-.cache/
 build/
 node_modules/
-result/
+result*

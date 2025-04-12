@@ -2,7 +2,7 @@
 
 import type { ESLintConfigParts } from './types';
 
-export const settings: ESLintConfigParts = (_) => [
+export const settings: ESLintConfigParts = _ => [
     {
         files: ['*.{ts,tsx}'],
         settings: {

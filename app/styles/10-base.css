@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
-//noinspection CssInvalidAtRule
-@reference '../tailwind.css';
+@reference './00-tailwind.css';
 
 @layer base {
     * {

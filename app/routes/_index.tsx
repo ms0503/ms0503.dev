@@ -1,6 +1,6 @@
 'use strict';
 
-import type { MetaFunction } from '@remix-run/cloudflare';
+import type { Route } from './+types/_index';
 
 const resources = [
     {
@@ -86,7 +86,7 @@ const resources = [
     }
 ];
 
-export const meta: MetaFunction = () => {
+export const meta: Route.MetaFunction = () => {
     return [
         {
             content: 'Welcome to Remix!',

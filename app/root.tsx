@@ -1,15 +1,12 @@
 'use strict';
 
-// eslint-disable-next-line import-x/order
-import './tailwind.css';
-
-// eslint-disable-next-line import-x/order
-import './index.scss';
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
-import type { LinksFunction } from '@remix-run/cloudflare';
+import './styles/00-tailwind.css';
+import './styles/10-base.css';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import type { Route } from './+types/root';
 import type { PropsWithChildren } from 'react';
 
-export const links: LinksFunction = () => [
+export const links: Route.LinksFunction = () => [
     {
         href: 'https://fonts.googleapis.com',
         rel: 'preconnect'
