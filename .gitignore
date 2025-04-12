@@ -2,9 +2,17 @@
 .cache/
 .dev.vars
 .env
+.pnp.*
 .pre-commit-config.yaml
 .react-router/
 .wrangler/
+.yarn/
 build/
 node_modules/
 result*
+
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/

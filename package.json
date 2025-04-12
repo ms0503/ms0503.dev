@@ -46,9 +46,12 @@
         "wrangler": "^4"
     },
     "engines": {
-        "node": ">=20.0.0"
+        "node": ">=20.0.0",
+        "npm": "use yarn instead",
+        "yarn": ">=4.0.0"
     },
     "name": "ms0503-dev",
+    "packageManager": "yarn@4.9.1",
     "private": true,
     "scripts": {
         "build": "react-router build",
