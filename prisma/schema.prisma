@@ -1,0 +1,62 @@
+generator client {
+    moduleFormat    = "esm"
+    output          = "../generated/prisma"
+    previewFeatures = ["driverAdapters"]
+    provider        = "prisma-client"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+// ///////////////
+// Normal Models
+// ///////////////
+
+model Category {
+    id   String @id @default(cuid(2))
+    name String @unique
+
+    posts Post[]
+
+    @@map("categories")
+}
+
+model Post {
+    id         String   @id @default(cuid(2))
+    title      String   @unique
+    body       String
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+    categoryId String   @map("category_id")
+
+    category Category     @relation(fields: [categoryId], references: [id])
+    tags     PostAndTag[]
+
+    @@map("posts")
+}
+
+model Tag {
+    id   String @id @default(cuid(2))
+    name String
+
+    posts PostAndTag[]
+
+    @@map("tags")
+}
+
+// /////////////////
+// Relation Models
+// /////////////////
+
+model PostAndTag {
+    postId String @map("post_id")
+    tagId  String @map("tag_id")
+
+    post Post @relation(fields: [postId], references: [id])
+    tag  Tag  @relation(fields: [tagId], references: [id])
+
+    @@id([postId, tagId])
+    @@map("posts_and_tags")
+}

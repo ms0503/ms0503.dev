@@ -18,6 +18,7 @@
               excludes = [
                 ".idea"
                 "flake.lock"
+                "worker-configuration.d.ts"
                 "yarn.lock"
               ];
             };

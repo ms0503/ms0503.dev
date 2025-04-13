@@ -1,31 +1,28 @@
-'use strict';
+"use strict";
 
 /** @type {import('stylelint').Config} */
 const config = {
-    extends: [
-        'stylelint-config-standard',
-        'stylelint-config-standard-scss'
-    ],
+    extends: ["stylelint-config-standard"],
     plugins: [
-        'stylelint-order',
-        'stylelint-declaration-block-no-ignored-properties'
+        "stylelint-order",
+        "stylelint-declaration-block-no-ignored-properties",
     ],
     rules: {
-        'alpha-value-notation': 'number',
-        'color-hex-length': 'short',
-        'length-zero-no-unit': true,
-        'order/order': [
-            'dollar-variables',
-            'custom-properties',
-            'declarations',
-            'at-rules',
-            'rules'
+        "alpha-value-notation": "number",
+        "color-hex-length": "short",
+        "length-zero-no-unit": true,
+        "order/order": [
+            "dollar-variables",
+            "custom-properties",
+            "declarations",
+            "at-rules",
+            "rules",
         ],
-        'order/properties-alphabetical-order': true,
-        'plugin/declaration-block-no-ignored-properties': true,
-        'selector-pseudo-element-colon-notation': 'double',
-        'shorthand-property-no-redundant-values': true
-    }
+        "order/properties-alphabetical-order": true,
+        "plugin/declaration-block-no-ignored-properties": true,
+        "selector-pseudo-element-colon-notation": "double",
+        "shorthand-property-no-redundant-values": true,
+    },
 };
 
 export default config;
