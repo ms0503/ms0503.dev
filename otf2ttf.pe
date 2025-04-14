@@ -1,0 +1,3 @@
+#!/usr/bin/env fontforge
+Open("fonts/NotoSansMonoCJKjp-" + $1 + ".otf")
+Generate("fonts/NotoSansMonoCJKjp-" + $1 + ".ttf")

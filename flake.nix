@@ -48,6 +48,7 @@
             in
             pkgs.mkShell {
               packages = with pkgs; [
+                fontforge
                 nodePackages.yarn
                 nodejs-slim
                 openssl

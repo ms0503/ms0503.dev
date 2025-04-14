@@ -18,6 +18,9 @@ trim_trailing_whitespace = false
 indent_size = 2
 tab_width = 2
 
+[*.{diff,patch}]
+trim_trailing_whitespace = false
+
 [{*.{yaml,yml},.yamllint}]
 indent_size = 2
 tab_width = 2

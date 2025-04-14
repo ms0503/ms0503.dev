@@ -3,40 +3,36 @@
 @reference './00-tailwind.css';
 
 @layer base {
-    * {
-        @apply box-border m-0 p-0;
-    }
-
-    html {
-        @apply antialiased font-normal font-sans text-base;
-        @apply bg-neutral-200 text-neutral-800;
+    html, body {
+        @apply font-sans;
+        @apply bg-neutral-100 text-neutral-800;
         @apply dark:bg-neutral-800 dark:text-neutral-200;
-        color-scheme: light dark;
-        font-synthesis: none;
-        text-rendering: optimizeLegibility;
+
+        @media (prefers-color-scheme: dark) {
+            color-scheme: dark;
+        }
     }
 
-    html, body, #root {
-        @apply max-w-[100dvw] min-h-dvh min-w-[100dvw] overflow-x-hidden place-items-center;
-    }
-
-    h1 {
-        @apply font-bold my-4 text-4xl;
-    }
-
-    p {
-        @apply mb-3;
+    body {
+        @apply flex flex-col min-h-screen;
     }
 
     a {
-        @apply font-medium no-underline;
-        @apply text-blue-600;
-        @apply dark:text-blue-400;
+        @apply no-underline;
+        @apply text-blue-500;
+    }
 
-        &:is(:active, :focus, :hover) {
-            @apply transition-colors underline;
-            @apply text-blue-800;
-            @apply dark:text-blue-600;
-        }
+    p {
+        @apply mb-2;
+    }
+
+    h1 {
+        @apply font-bold mb-4 text-4xl;
+    }
+
+    input {
+        @apply border-2 px-2 py-1 rounded-md;
+        @apply border-neutral-800;
+        @apply dark:border-neutral-200;
     }
 }

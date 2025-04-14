@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+@reference "../styles/00-tailwind.css";
+
+.active {
+    @apply bg-neutral-400;
+    @apply dark:bg-neutral-700;
+}

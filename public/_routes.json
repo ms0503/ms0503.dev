@@ -1,7 +1,9 @@
 {
     "exclude": [
-        "/assets/*",
-        "/favicon.ico"
+        "/apple-touch-icon.png",
+        "/favicon.ico",
+        "/fonts/*",
+        "/icon-*"
     ],
     "include": [
         "/*"

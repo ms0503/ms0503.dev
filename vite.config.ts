@@ -12,5 +12,19 @@ export default defineConfig({
         reactRouter(),
         tailwindcss(),
         tsconfigPaths()
-    ]
+    ],
+    server: {
+        cors: true,
+        headers: {
+            'Access-Control-Allow-Methods': 'GET, OPTIONS, POST',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Max-Age': '604800',
+            'Content-Security-Policy': 'default-src \'self\'; connect-src \'self\'; font-src \'self\' https://fonts.gstatic.com',
+            'Referrer-Policy': 'origin-when-crossorigin',
+            'X-Content-Type-Options': 'nosniff',
+            'X-DNS-Prefetch-Control': 'on',
+            'X-UA-Compatible': 'IE=edge',
+            'X-XSS-Protection': '1; mode=block'
+        }
+    }
 });

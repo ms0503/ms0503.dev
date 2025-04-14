@@ -1,12 +1,62 @@
 'use strict';
 
-import './styles/00-tailwind.css';
-import './styles/10-base.css';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import Footer from '~/components/footer';
+import Header from '~/components/header';
+import '~/styles/00-tailwind.css';
+import '~/styles/10-base.css';
 import type { Route } from './+types/root';
 import type { PropsWithChildren } from 'react';
 
 export const links: Route.LinksFunction = () => [
+    {
+        href: '/apple-touch-icon.png',
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        type: 'image/png'
+    },
+    {
+        href: '/favicon.ico',
+        rel: 'icon',
+        sizes: '32x32',
+        type: 'image/vnd.microsoft.icon'
+    },
+    {
+        href: '/icon-192.avif',
+        rel: 'icon',
+        sizes: '192x192',
+        type: 'image/avif'
+    },
+    {
+        href: '/icon-192.png',
+        rel: 'icon',
+        sizes: '192x192',
+        type: 'image/png'
+    },
+    {
+        href: '/icon-192.webp',
+        rel: 'icon',
+        sizes: '192x192',
+        type: 'image/webp'
+    },
+    {
+        href: '/icon-512.avif',
+        rel: 'icon',
+        sizes: '512x512',
+        type: 'image/avif'
+    },
+    {
+        href: '/icon-512.png',
+        rel: 'icon',
+        sizes: '512x512',
+        type: 'image/png'
+    },
+    {
+        href: '/icon-512.webp',
+        rel: 'icon',
+        sizes: '512x512',
+        type: 'image/webp'
+    },
     {
         href: 'https://fonts.googleapis.com',
         rel: 'preconnect'
@@ -17,7 +67,15 @@ export const links: Route.LinksFunction = () => [
         rel: 'preconnect'
     },
     {
-        href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans+Mono:wght@100..900&display=swap',
+        rel: 'stylesheet'
+    },
+    {
+        href: '/fonts/NotoSansMonoCJKjp-Bold.css',
+        rel: 'stylesheet'
+    },
+    {
+        href: '/fonts/NotoSansMonoCJKjp-Regular.css',
         rel: 'stylesheet'
     }
 ];
@@ -36,7 +94,13 @@ export function Layout({ children }: PropsWithChildren) {
                 <Links />
             </head>
             <body>
-                {children}
+                <Header className="shrink" />
+                <hr />
+                <div className="grow">
+                    {children}
+                </div>
+                <hr />
+                <Footer className="shrink" />
                 <ScrollRestoration />
                 <Scripts />
             </body>

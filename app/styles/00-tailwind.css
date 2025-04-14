@@ -1,7 +1,9 @@
 @charset "UTF-8";
 
+/* stylelint-disable import-notation */
 @import 'tailwindcss';
 
 @theme {
-    --font-sans: 'Noto Sans JP', 'Noto Sans CJK JP', 'Helvetica Neue', Helvetica, Arial, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, ui-sans-serif, system-ui, sans-serif, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --font-mono: 'Noto Sans Mono CJK JP', 'Noto Sans Mono', 'Source Code Pro', 'Source Han Code JP', ui-monospace, monospace, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --font-sans: 'Noto Sans JP', 'Noto Sans CJK JP', 'Helvetica Neue', helvetica, arial, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', meiryo, ui-sans-serif, system-ui, sans-serif, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }

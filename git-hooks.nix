@@ -18,6 +18,7 @@
               excludes = [
                 ".idea"
                 "flake.lock"
+                "noto-sans-mono-cjk-jp-include.txt"
                 "worker-configuration.d.ts"
                 "yarn.lock"
               ];

@@ -1,4 +1,18 @@
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
+/*
+    Access-Control-Allow-Methods: GET, OPTIONS, POST
+    Access-Control-Allow-Origin: *
+    Access-Control-Max-Age: 604800
+    Content-Security-Policy: default-src 'self'; connect-src 'self'; font-src 'self' https://fonts.gstatic.com
+    Referrer-Policy: origin-when-crossorigin
+    X-Content-Type-Options: nosniff
+    X-DNS-Prefetch-Control: on
+    X-UA-Compatible: IE=edge
+    X-XSS-Protection: 1; mode=block
+/apple-touch-icon.png
+    Cache-Control: public, max-age=3600, s-maxage=3600
 /favicon.ico
-  Cache-Control: public, max-age=3600, s-maxage=3600
+    Cache-Control: public, max-age=3600, s-maxage=3600
+/fonts/*
+    Cache-Control: public, max-age=3600, s-maxage=3600
+/icon-*
+    Cache-Control: public, max-age=3600, s-maxage=3600
