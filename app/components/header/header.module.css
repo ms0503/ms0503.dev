@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@reference "../tailwind.css";
+@reference "../../tailwind.css";
 
 .active {
     @apply bg-neutral-400;
