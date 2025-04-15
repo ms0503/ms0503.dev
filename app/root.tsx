@@ -1,10 +1,9 @@
 'use strict';
 
+import './tailwind.css';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import Footer from '~/components/footer';
 import Header from '~/components/header';
-import '~/styles/00-tailwind.css';
-import '~/styles/10-base.css';
 import type { Route } from './+types/root';
 import type { PropsWithChildren } from 'react';
 
