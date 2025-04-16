@@ -12,9 +12,9 @@ export default function BlogPost({ loaderData: { body, post } }: Route.Component
     );
 }
 
-export async function loader({ params: { postId } }: Route.LoaderArgs) {
-    const post = await getPostById(postId);
-    const body = await getPostBodyById(postId);
+export async function loader({ context: { db }, params: { postId } }: Route.LoaderArgs) {
+    const post = await getPostById(db, postId);
+    const body = await getPostBodyById(db, postId);
     return {
         body,
         post

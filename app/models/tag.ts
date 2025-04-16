@@ -1,10 +1,10 @@
 'use strict';
 
-import { db } from '~/services/db.server';
 import type { Pick } from '@prisma/client/runtime/client';
+import type { AppLoadContext } from 'react-router';
 import type { Post, PostAndTag, Tag } from '~/generated/client';
 
-async function getPosts(postAndTags: Pick<PostAndTag, 'postId'>[]): Promise<Post[]> {
+async function getPosts(db: AppLoadContext['db'], postAndTags: Pick<PostAndTag, 'postId'>[]): Promise<Post[]> {
     const posts: Post[] = [];
     for(const { postId } of postAndTags) {
         const post = await db.post.findUniqueOrThrow({
@@ -17,116 +17,81 @@ async function getPosts(postAndTags: Pick<PostAndTag, 'postId'>[]): Promise<Post
     return posts;
 }
 
-export async function getTagById(id: Tag['id']): Promise<Tag> {
-    try {
-        await db.$connect();
-        return db.tag.findUniqueOrThrow({
-            where: {
-                id
-            }
-        });
-    } finally {
-        await db.$disconnect();
-    }
+export async function getTagById(db: AppLoadContext['db'], id: Tag['id']): Promise<Tag> {
+    return db.tag.findUniqueOrThrow({
+        where: {
+            id
+        }
+    });
 }
 
-export async function getTagByName(name: Tag['name']): Promise<Tag> {
-    try {
-        await db.$connect();
-        return db.tag.findUniqueOrThrow({
-            where: {
-                name
-            }
-        });
-    } finally {
-        await db.$disconnect();
-    }
+export async function getTagByName(db: AppLoadContext['db'], name: Tag['name']): Promise<Tag> {
+    return db.tag.findUniqueOrThrow({
+        where: {
+            name
+        }
+    });
 }
 
-export async function getTagIdByName(name: Tag['name']): Promise<Tag['id']> {
-    try {
-        await db.$connect();
-        const { id } = await db.tag.findUniqueOrThrow({
-            select: {
-                id: true
-            },
-            where: {
-                name
-            }
-        });
-        return id;
-    } finally {
-        await db.$disconnect();
-    }
+export async function getTagIdByName(db: AppLoadContext['db'], name: Tag['name']): Promise<Tag['id']> {
+    const { id } = await db.tag.findUniqueOrThrow({
+        select: {
+            id: true
+        },
+        where: {
+            name
+        }
+    });
+    return id;
 }
 
-export async function getTagNameById(id: Tag['id']): Promise<Tag['name']> {
-    try {
-        await db.$connect();
-        const { name } = await db.tag.findUniqueOrThrow({
-            select: {
-                name: true
-            },
-            where: {
-                id
-            }
-        });
-        return name;
-    } finally {
-        await db.$disconnect();
-    }
+export async function getTagNameById(db: AppLoadContext['db'], id: Tag['id']): Promise<Tag['name']> {
+    const { name } = await db.tag.findUniqueOrThrow({
+        select: {
+            name: true
+        },
+        where: {
+            id
+        }
+    });
+    return name;
 }
 
-export async function getTagPostsById(id: Tag['id']): Promise<Post[]> {
-    try {
-        await db.$connect();
-        const { posts } = await db.tag.findUniqueOrThrow({
-            select: {
-                posts: {
-                    select: {
-                        postId: true
-                    }
+export async function getTagPostsById(db: AppLoadContext['db'], id: Tag['id']): Promise<Post[]> {
+    const { posts } = await db.tag.findUniqueOrThrow({
+        select: {
+            posts: {
+                select: {
+                    postId: true
                 }
-            },
-            where: {
-                id
             }
-        });
-        return getPosts(posts);
-    } finally {
-        await db.$disconnect();
-    }
+        },
+        where: {
+            id
+        }
+    });
+    return getPosts(db, posts);
 }
 
-export async function getTagPostsByName(name: Tag['name']): Promise<Post[]> {
-    try {
-        await db.$connect();
-        const { posts } = await db.tag.findUniqueOrThrow({
-            select: {
-                posts: {
-                    select: {
-                        postId: true
-                    }
+export async function getTagPostsByName(db: AppLoadContext['db'], name: Tag['name']): Promise<Post[]> {
+    const { posts } = await db.tag.findUniqueOrThrow({
+        select: {
+            posts: {
+                select: {
+                    postId: true
                 }
-            },
-            where: {
-                name
             }
-        });
-        return getPosts(posts);
-    } finally {
-        await db.$disconnect();
-    }
+        },
+        where: {
+            name
+        }
+    });
+    return getPosts(db, posts);
 }
 
-export async function getTags(count: number = 0, page: number = 1): Promise<Tag[]> {
-    try {
-        await db.$connect();
-        return db.tag.findMany({
-            skip: count === -1 ? undefined : count * (page - 1),
-            take: count === -1 ? undefined : count
-        });
-    } finally {
-        await db.$disconnect();
-    }
+export async function getTags(db: AppLoadContext['db'], count: number = 0, page: number = 1): Promise<Tag[]> {
+    return db.tag.findMany({
+        skip: count === -1 ? undefined : count * (page - 1),
+        take: count === -1 ? undefined : count
+    });
 }

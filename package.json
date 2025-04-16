@@ -60,7 +60,6 @@
     "private": true,
     "scripts": {
         "build": "react-router build",
-        "cf-typegen": "wrangler types",
         "clean": "rimraf build/",
         "deploy": "yarn run build && wrangler pages deploy",
         "dev": "react-router dev",
@@ -78,7 +77,7 @@
         "lint:lint:style": "stylelint app/**/*.css",
         "preview": "yarn run build && wrangler pages dev",
         "start": "wrangler pages dev ./build/client",
-        "typecheck": "react-router typegen && tsc",
+        "typecheck": "yarn run typegen && tsc",
         "typegen": "react-router typegen && wrangler types"
     },
     "sideEffects": false,
