@@ -7,9 +7,9 @@
 .react-router/
 .wrangler/
 .yarn/
+app/generated/
 build/
 deb.db
-generated/
 node_modules/
 result*
 

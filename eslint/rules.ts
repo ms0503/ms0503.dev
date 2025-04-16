@@ -140,6 +140,9 @@ export const rules: ESLintConfigParts = _ => [
                         catch: {
                             after: false
                         },
+                        for: {
+                            after: false
+                        },
                         if: {
                             after: false
                         },

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* stylelint-disable import-notation */
-@import '../node_modules/tailwindcss/dist/lib.d.mts';
+@import 'tailwindcss';
 
 @theme {
     --font-mono: 'Noto Sans Mono CJK JP', 'Noto Sans Mono', 'Source Code Pro', 'Source Han Code JP', ui-monospace, monospace, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';

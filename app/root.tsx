@@ -95,9 +95,9 @@ export function Layout({ children }: PropsWithChildren) {
             <body>
                 <Header className="shrink" />
                 <hr />
-                <div className="grow">
+                <main className="flex flex-col grow items-center justify-center mx-6 my-4">
                     {children}
-                </div>
+                </main>
                 <hr />
                 <Footer className="shrink" />
                 <ScrollRestoration />

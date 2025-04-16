@@ -23,7 +23,11 @@
                 "yarn.lock"
               ];
             };
-            eslint.enable = true;
+            eslint = {
+              enable = true;
+              entry = "node_modules/.bin/eslint";
+              package = null;
+            };
             markdownlint = {
               enable = true;
               settings.configuration = {

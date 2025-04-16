@@ -16,9 +16,9 @@ export const meta: Route.MetaFunction = () => {
 
 export default function Top() {
     return (
-        <div className="flex flex-col items-center justify-center mx-6 my-4">
+        <>
             <h1>ms0503.dev</h1>
             <p>Λ-----[工事中]-----Λ</p>
-        </div>
+        </>
     );
 }

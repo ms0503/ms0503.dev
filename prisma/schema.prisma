@@ -1,6 +1,6 @@
 generator client {
     moduleFormat    = "esm"
-    output          = "../generated/prisma"
+    output          = "../app/generated/client"
     previewFeatures = ["driverAdapters"]
     provider        = "prisma-client"
 }
@@ -39,7 +39,7 @@ model Post {
 
 model Tag {
     id   String @id @default(cuid(2))
-    name String
+    name String @unique
 
     posts PostAndTag[]
 
