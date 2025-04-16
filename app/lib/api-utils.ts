@@ -10,6 +10,7 @@ export type ActionArgs<TArgs extends ActionFunctionArgs = ActionFunctionArgs, TF
     args: TArgs
 };
 
+// noinspection ParameterNamingConventionJS
 export function action<TArgs extends ActionFunctionArgs = ActionFunctionArgs, TFunc extends ActionFunction = ActionFunction>({ DELETE,
     PATCH,
     POST,

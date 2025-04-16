@@ -295,8 +295,8 @@ export async function getPosts(count: number = 0, page: number = 1): Promise<Pos
     try {
         await db.$connect();
         return db.post.findMany({
-            skip: count == -1 ? undefined : count * (page - 1),
-            take: count == -1 ? undefined : count
+            skip: count === -1 ? undefined : count * (page - 1),
+            take: count === -1 ? undefined : count
         });
     } finally {
         await db.$disconnect();

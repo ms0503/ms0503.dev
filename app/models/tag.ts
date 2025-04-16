@@ -123,8 +123,8 @@ export async function getTags(count: number = 0, page: number = 1): Promise<Tag[
     try {
         await db.$connect();
         return db.tag.findMany({
-            skip: count == -1 ? undefined : count * (page - 1),
-            take: count == -1 ? undefined : count
+            skip: count === -1 ? undefined : count * (page - 1),
+            take: count === -1 ? undefined : count
         });
     } finally {
         await db.$disconnect();

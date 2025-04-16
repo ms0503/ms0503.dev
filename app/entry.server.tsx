@@ -14,6 +14,7 @@ export default async function handleRequest(
     reactRouterContext: EntryContext,
     _loadContext: AppLoadContext
 ) {
+    let status = responseStatusCode;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), ABORT_DELAY);
     const body = await renderToReadableStream(
@@ -24,10 +25,9 @@ export default async function handleRequest(
         {
             onError(error: unknown) {
                 if(!controller.signal.aborted) {
-                    // Log streaming rendering errors from inside the shell
                     console.error(error);
                 }
-                responseStatusCode = 500;
+                status = 500;
             },
             signal: controller.signal
         }
@@ -39,6 +39,6 @@ export default async function handleRequest(
     responseHeaders.set('Content-Type', 'text/html');
     return new Response(body, {
         headers: responseHeaders,
-        status: responseStatusCode
+        status
     });
 }
