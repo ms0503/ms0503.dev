@@ -1,5 +1,6 @@
 "$schema" = "node_modules/wrangler/config-schema.json"
 compatibility_date = "2025-04-02"
+compatibility_flags = ["nodejs_compat"]
 name = "ms0503-dev"
 pages_build_output_dir = "./build/client"
 
