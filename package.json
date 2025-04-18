@@ -1,12 +1,11 @@
 {
     "dependencies": {
         "@cloudflare/workers-types": "^4",
-        "@prisma/adapter-d1": "=6.6.0",
-        "@prisma/client": "=6.6.0",
         "@react-router/cloudflare": "^7",
         "dotenv": "^16",
+        "drizzle-cuid2": "^2",
+        "drizzle-orm": "^0.42",
         "isbot": "^5",
-        "prisma": "=6.6.0",
         "react": "^19",
         "react-dom": "^19",
         "react-icons": "^5",
@@ -25,6 +24,7 @@
         "@types/node": "^22",
         "@types/react": "^19",
         "@types/react-dom": "^19",
+        "drizzle-kit": "^0.31",
         "eslint": "^9",
         "eslint-import-resolver-typescript": "^4",
         "eslint-plugin-import-x": "^4",

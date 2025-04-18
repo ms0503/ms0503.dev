@@ -1,25 +1,18 @@
 'use strict';
 
-// noinspection ES6PreferShortImport
-import { PrismaD1 } from '@prisma/adapter-d1';
-import { PrismaClient } from '@prisma/client/edge';
+import { drizzle } from 'drizzle-orm/d1';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace global {
-    let prisma: PrismaClient | undefined;
+    let client: ReturnType<typeof drizzle>;
 }
 
 export async function connectToDB(db: D1Database) {
-    const adapter = new PrismaD1(db);
     if(process.env['NODE_ENV'] === 'production') {
-        return new PrismaClient({
-            adapter
-        });
+        return drizzle(db);
     }
-    if(!global.prisma) {
-        global.prisma = new PrismaClient({
-            adapter
-        });
+    if(!global.client) {
+        global.client = drizzle(db);
     }
-    return global.prisma;
+    return global.client;
 }
