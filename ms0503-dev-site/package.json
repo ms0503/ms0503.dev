@@ -79,7 +79,9 @@
         "preview": "yarn run build && wrangler pages dev",
         "start": "wrangler pages dev ./build/client/",
         "typecheck": "yarn run typegen && tsc",
-        "typegen": "react-router typegen && wrangler types"
+        "typegen": "run-p 'typegen:*'",
+        "typegen:react-router": "react-router typegen",
+        "typegen:wrangler": "wrangler types"
     },
     "type": "module"
 }
