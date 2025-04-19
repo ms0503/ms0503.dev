@@ -17,6 +17,7 @@
         "build:lib": "run-s build:lib:eslint build:lib:db",
         "build:lib:db": "yarn workspace ms0503-dev-db run build",
         "build:lib:eslint": "yarn workspace ms0503-dev-eslint run build",
+        "clean": "yarn workspaces foreach -Ap run clean",
         "dev": "yarn workspaces foreach -Ap run dev",
         "lint": "yarn run build:lib:eslint && yarn workspaces foreach -Ap run lint",
         "lint:fix": "yarn run build:lib:eslint && yarn workspaces foreach -Ap run lint:fix",

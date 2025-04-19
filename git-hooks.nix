@@ -19,6 +19,7 @@
                 ".*/worker-configuration.d.ts"
                 ".idea"
                 "flake.lock"
+                "ms0503-dev-db/dist"
                 "ms0503-dev-site/noto-sans-mono-cjk-jp-include.txt"
                 "yarn.lock"
               ];
@@ -26,6 +27,9 @@
             eslint = {
               enable = true;
               entry = "node_modules/.bin/eslint";
+              excludes = [
+                "ms0503-dev-db/dist"
+              ];
               package = null;
             };
             markdownlint = {
