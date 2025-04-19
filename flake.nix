@@ -43,10 +43,25 @@
         {
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
+              at-spi2-atk
+              atkmm
+              cairo
+              cargo-tauri
               fontforge
+              gdk-pixbuf
+              glib
+              gobject-introspection
+              gtk3
+              harfbuzz
+              inputs'.fenix.packages.latest.toolchain
+              librsvg
+              libsoup_3
               nodePackages.yarn
               nodejs-slim
               openssl
+              pango
+              pkg-config
+              webkitgtk_4_1
             ];
             shellHook = ''
               ${config.pre-commit.installationScript}

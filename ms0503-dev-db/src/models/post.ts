@@ -1,0 +1,123 @@
+'use strict';
+
+import { categories } from '../schemas/categories';
+import { posts, postsWithoutBody } from '../schemas/posts';
+import { postsAndTags } from '../schemas/posts-and-tags';
+import { tags } from '../schemas/tags';
+import { eq } from 'drizzle-orm';
+import type { Category, DB, Post, PostAndTag, PostWithoutBody, Tag } from './types';
+
+async function getTags(db: DB, postAndTags: Pick<PostAndTag, 'tagId'>[]): Promise<Tag[]> {
+    const tagArr: Tag[] = [];
+    for(const { tagId } of postAndTags) {
+        const tag = await db.select().from(tags).where(eq(tags.id, tagId)).then(v => v[0]);
+        tagArr.push(tag);
+    }
+    return tagArr;
+}
+
+export async function getPostBodyById(db: DB, id: Post['id']): Promise<Post['body']> {
+    return db.select({
+        body: posts.body
+    }).from(posts).where(eq(posts.id, id)).then(v => v[0].body);
+}
+
+export async function getPostBodyByTitle(db: DB, title: Post['title']): Promise<Post['body']> {
+    return db.select({
+        body: posts.body
+    }).from(posts).where(eq(posts.title, title)).then(v => v[0].body);
+}
+
+export async function getPostById(db: DB, id: Post['id']): Promise<PostWithoutBody> {
+    return db.select().from(postsWithoutBody).where(eq(postsWithoutBody.id, id)).then(v => v[0]);
+}
+
+export async function getPostByTitle(db: DB, title: Post['title']): Promise<PostWithoutBody> {
+    return db.select().from(postsWithoutBody).where(eq(postsWithoutBody.title, title)).then(v => v[0]);
+}
+
+export async function getPostCategoryById(db: DB, id: Post['id']): Promise<Category> {
+    return db.select().from(categories).where(eq(categories.id, await getPostCategoryIdById(db, id))).then(v => v[0]);
+}
+
+export async function getPostCategoryByTitle(db: DB, title: Post['title']): Promise<Category> {
+    return db.select().from(categories).where(eq(categories.id, await getPostCategoryIdByTitle(db, title))).then(v => v[0]);
+}
+
+export async function getPostCategoryIdById(db: DB, id: Post['id']): Promise<Post['categoryId']> {
+    return db.select({
+        categoryId: postsWithoutBody.categoryId
+    }).from(postsWithoutBody).where(eq(postsWithoutBody.id, id)).then(v => v[0].categoryId);
+}
+
+export async function getPostCategoryIdByTitle(db: DB, title: Post['title']): Promise<Post['categoryId']> {
+    return db.select({
+        categoryId: postsWithoutBody.categoryId
+    }).from(postsWithoutBody).where(eq(postsWithoutBody.title, title)).then(v => v[0].categoryId);
+}
+
+export async function getPostCreatedAtById(db: DB, id: Post['id']): Promise<Post['createdAt']> {
+    return db.select({
+        createdAt: postsWithoutBody.createdAt
+    }).from(postsWithoutBody).where(eq(postsWithoutBody.id, id)).then(v => v[0].createdAt);
+}
+
+export async function getPostCreatedAtByTitle(db: DB, title: Post['title']): Promise<Post['createdAt']> {
+    return db.select({
+        createdAt: postsWithoutBody.createdAt
+    }).from(postsWithoutBody).where(eq(postsWithoutBody.title, title)).then(v => v[0].createdAt);
+}
+
+export async function getPostIdByTitle(db: DB, title: Post['title']): Promise<Post['id']> {
+    return db.select({
+        id: postsWithoutBody.id
+    }).from(postsWithoutBody).where(eq(postsWithoutBody.title, title)).then(v => v[0].id);
+}
+
+export async function getPostTagsById(db: DB, id: Post['id']): Promise<Tag[]> {
+    const tags = await db.select({
+        tagId: postsAndTags.tagId
+    }).from(postsAndTags).where(eq(postsAndTags.postId, id));
+    return getTags(db, tags);
+}
+
+export async function getPostTagsByTitle(db: DB, title: Post['title']): Promise<Tag[]> {
+    const tags = await db.select({
+        tagId: postsAndTags.tagId
+    }).from(postsAndTags).where(eq(postsAndTags.postId, await getPostIdByTitle(db, title)));
+    return getTags(db, tags);
+}
+
+export async function getPostTitleById(db: DB, id: Post['id']): Promise<Post['title']> {
+    return db.select({
+        title: postsWithoutBody.title
+    }).from(postsWithoutBody).where(eq(postsWithoutBody.id, id)).then(v => v[0].title);
+}
+
+export async function getPostUpdatedAtById(db: DB, id: Post['id']): Promise<Post['updatedAt']> {
+    return db.select({
+        updatedAt: postsWithoutBody.updatedAt
+    }).from(postsWithoutBody).where(eq(postsWithoutBody.id, id)).then(v => v[0].updatedAt);
+}
+
+export async function getPostUpdatedAtByTitle(db: DB, title: Post['title']): Promise<Post['updatedAt']> {
+    return db.select({
+        updatedAt: postsWithoutBody.updatedAt
+    }).from(postsWithoutBody).where(eq(postsWithoutBody.title, title)).then(v => v[0].updatedAt);
+}
+
+export async function getPosts(db: DB, count: number = 0, page: number = 1): Promise<PostWithoutBody[]> {
+    const base = db.select().from(postsWithoutBody);
+    if(count === -1) {
+        return base;
+    }
+    return base.limit(count).offset(count * (page - 1));
+}
+
+export async function getPostsWithBody(db: DB, count: number = 0, page: number = 1): Promise<Post[]> {
+    const base = db.select().from(posts);
+    if(count === -1) {
+        return base;
+    }
+    return base.limit(count).offset(count * (page - 1));
+}

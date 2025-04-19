@@ -16,10 +16,10 @@
             editorconfig-checker = {
               enable = true;
               excludes = [
+                ".*/worker-configuration.d.ts"
                 ".idea"
                 "flake.lock"
-                "noto-sans-mono-cjk-jp-include.txt"
-                "worker-configuration.d.ts"
+                "ms0503-dev-site/noto-sans-mono-cjk-jp-include.txt"
                 "yarn.lock"
               ];
             };

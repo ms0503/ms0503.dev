@@ -1,16 +1,6 @@
-**/*.js
 **/.direnv/
-*.env*
-.cache/
-.dev.vars
-.pnp.*
 .pre-commit-config.yaml
-.react-router/
-.wrangler/
 .yarn/
-app/generated/
-build/
-deb.db
 node_modules/
 result*
 

@@ -1,0 +1,50 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "jsx": "react-jsx",
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "noEmit": true,
+        "paths": {
+            "~/*": [
+                "./app/*"
+            ]
+        },
+        "resolveJsonModule": true,
+        "rootDirs": [
+            ".",
+            "./.react-router/types"
+        ],
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "ES2022",
+        "types": [
+            "@react-router/cloudflare",
+            "node",
+            "react",
+            "react-dom",
+            "vite/client"
+        ]
+    },
+    "include": [
+        ".react-router/types/**/*",
+        "app/**/*.ts",
+        "app/**/*.tsx",
+        "functions/**/*.ts",
+        "worker-configuration.d.ts"
+    ],
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ]
+}

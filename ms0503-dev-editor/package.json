@@ -1,0 +1,55 @@
+{
+    "dependencies": {
+        "@react-router/node": "^7",
+        "@tauri-apps/api": "^2",
+        "@tauri-apps/plugin-opener": "^2",
+        "drizzle-orm": "^0.42",
+        "react": "^19",
+        "react-dom": "^19",
+        "react-router": "^7"
+    },
+    "devDependencies": {
+        "@eslint/compat": "^1",
+        "@eslint/eslintrc": "^3",
+        "@react-router/dev": "^7",
+        "@tailwindcss/language-server": "^0.14",
+        "@tailwindcss/vite": "^4",
+        "@tauri-apps/cli": "^2",
+        "@types/node": "^22",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "drizzle-kit": "^0.31",
+        "eslint": "^9",
+        "jiti": "^2",
+        "ms0503-dev-eslint": "workspace:*",
+        "npm-run-all": "^4",
+        "rimraf": "^6",
+        "stylelint": "^16",
+        "stylelint-config-standard": "^38",
+        "stylelint-declaration-block-no-ignored-properties": "^2",
+        "stylelint-order": "^6",
+        "tailwindcss": "^4",
+        "typescript": "^5",
+        "vite": "^6",
+        "vite-tsconfig-paths": "^5"
+    },
+    "engines": {
+        "node": ">=21.0.0",
+        "npm": "use yarn instead",
+        "pnpm": "use yarn instead",
+        "yarn": ">=4.0.0"
+    },
+    "name": "ms0503-dev-editor",
+    "packageManager": "yarn@4.9.1",
+    "private": true,
+    "scripts": {
+        "build": "tsc && vite build",
+        "clean": "rimraf build/",
+        "dev": "vite",
+        "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint/ .",
+        "lint:fix": "eslint --cache --cache-location ./node_modules/.cache/eslint/ --fix .",
+        "preview": "vite preview",
+        "typecheck": "yarn run typegen && tsc"
+    },
+    "type": "module"
+}

@@ -1,0 +1,19 @@
+'use strict';
+
+import type { categories } from '../schemas/categories';
+import type { posts, postsWithoutBody } from '../schemas/posts';
+import type { postsAndTags } from '../schemas/posts-and-tags';
+import type { tags } from '../schemas/tags';
+import type { drizzle } from 'drizzle-orm/d1';
+
+export type Category = typeof categories.$inferSelect;
+
+export type DB = ReturnType<typeof drizzle>;
+
+export type Post = typeof posts.$inferSelect;
+
+export type PostAndTag = typeof postsAndTags.$inferSelect;
+
+export type PostWithoutBody = typeof postsWithoutBody.$inferSelect;
+
+export type Tag = typeof tags.$inferSelect;

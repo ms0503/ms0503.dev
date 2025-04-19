@@ -6,8 +6,8 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
-      <excludeFolder url="file://$MODULE_DIR$/fonts" />
-      <excludeFolder url="file://$MODULE_DIR$/public/fonts" />
+      <excludeFolder url="file://$MODULE_DIR$/ms0503-dev-site/fonts" />
+      <excludeFolder url="file://$MODULE_DIR$/ms0503-dev-site/public/fonts" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

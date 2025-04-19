@@ -1,0 +1,6 @@
+*.env*
+.react-router/
+.wrangler/
+app/generated/
+build/
+node_modules/

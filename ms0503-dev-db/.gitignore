@@ -1,0 +1,5 @@
+*.env*
+.wrangler/
+build/
+migrations/
+node_modules/
