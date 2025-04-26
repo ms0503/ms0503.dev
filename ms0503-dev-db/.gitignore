@@ -1,4 +1,4 @@
-*.env*
+.dev.vars
 .wrangler/
-migrations/
+build/
 node_modules/

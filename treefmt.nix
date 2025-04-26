@@ -81,6 +81,9 @@
         settings.formatter = {
           jsonfmt = {
             command = "${jsonfmt}/bin/jf";
+            excludes = [
+              "ms0503-dev-editor/gen"
+            ];
             options = lib.mkForce [ ];
             package = jsonfmt;
           };

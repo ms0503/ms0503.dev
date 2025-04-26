@@ -2,12 +2,18 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/ms0503-dev-db/ms0503-dev-db/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ms0503-dev-db/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ms0503-dev-editor/src-tauri/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.direnv" />
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/ms0503-dev-site/fonts" />
       <excludeFolder url="file://$MODULE_DIR$/ms0503-dev-site/public/fonts" />
+      <excludeFolder url="file://$MODULE_DIR$/ms0503-dev-db/ms0503-dev-db/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ms0503-dev-editor/src-tauri/target" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -3,6 +3,7 @@
 .yarn/
 node_modules/
 result*
+target/
 
 !.yarn/patches/
 !.yarn/plugins/

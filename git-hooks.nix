@@ -11,7 +11,12 @@
         settings = {
           hooks = {
             actionlint.enable = true;
-            check-json.enable = true;
+            check-json = {
+              enable = true;
+              excludes = [
+                "ms0503-dev-editor/gen"
+              ];
+            };
             check-toml.enable = true;
             editorconfig-checker = {
               enable = true;

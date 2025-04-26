@@ -25,21 +25,19 @@
     },
     "exports": {
         ".": {
-            "@ms0503-dev/condition-ts": "./src/index.ts",
-            "import": "./dist/index.js",
-            "types": "./dist/index.d.ts"
+            "types": "./src/index.ts"
         }
     },
     "name": "ms0503-dev-db",
     "packageManager": "yarn@4.9.1",
     "scripts": {
-        "build": "tsc --noEmit false --outDir dist/ && ts-add-js-extension --dir=dist/ && tsc --declaration true --emitDeclarationOnly --noEmit false --outDir dist/",
-        "clean": "rimraf dist/",
+        "build": ":",
+        "clean": ":",
         "dev": ":",
         "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint/ .",
         "lint:fix": "eslint --cache --cache-location ./node_modules/.cache/eslint/ --fix .",
-        "typecheck": "yarn run typegen && tsc",
-        "typegen": "wrangler types"
+        "typecheck": "tsc",
+        "typegen": ":"
     },
     "type": "module"
 }

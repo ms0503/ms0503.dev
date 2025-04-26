@@ -43,9 +43,17 @@
         {
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
+              (
+                with inputs'.fenix.packages;
+                combine [
+                  latest.toolchain
+                  targets.wasm32-unknown-unknown.latest.rust-std
+                ]
+              )
               at-spi2-atk
               atkmm
               cairo
+              cargo-generate
               cargo-tauri
               fontforge
               gdk-pixbuf
@@ -53,7 +61,6 @@
               gobject-introspection
               gtk3
               harfbuzz
-              inputs'.fenix.packages.latest.toolchain
               librsvg
               libsoup_3
               nodePackages.yarn
@@ -62,6 +69,7 @@
               pango
               pkg-config
               webkitgtk_4_1
+              worker-build
             ];
             shellHook = ''
               ${config.pre-commit.installationScript}

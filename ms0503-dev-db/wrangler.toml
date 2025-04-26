@@ -1,8 +1,19 @@
 "$schema" = "../node_modules/wrangler/config-schema.json"
 compatibility_date = "2025-04-02"
+main = "build/worker/shim.mjs"
 name = "ms0503-dev-db"
+
+[build]
+command = "worker-build --release"
 
 [[d1_databases]]
 binding = "db"
 database_id = "4591e282-92ed-4404-aa80-ba091b2e8eab"
 database_name = "ms0503-dev"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[placement]
+mode = "smart"

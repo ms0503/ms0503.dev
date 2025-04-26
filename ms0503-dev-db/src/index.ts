@@ -1,11 +1,29 @@
 'use strict';
 
-export * from './connect';
+export type Category = {
+    id: string,
+    name: string
+};
 
-export * from './models/category';
+export type Post = {
+    categoryId: Category['id'],
+    createdAt: string,
+    id: string,
+    title: string,
+    updatedAt: string
+};
 
-export * from './models/post';
+export type PostAndTag = {
+    postId: Post['id'],
+    tagId: Tag['id']
+};
 
-export * from './models/tag';
+export type PostBody = {
+    body: string,
+    id: string
+};
 
-export type * from './models/types';
+export type Tag = {
+    id: string,
+    name: string
+};

@@ -1,0 +1,30 @@
+[dependencies]
+console_error_panic_hook = "0.1"
+cuid2 = "0.1"
+dotenvy = "0.15"
+serde_json = "1"
+worker-macros = "0.5"
+
+[dependencies.serde]
+features = ["derive"]
+version = "1"
+
+[dependencies.worker]
+features = ["d1"]
+version = "0.5"
+
+[lib]
+crate-type = ["cdylib"]
+
+[package]
+authors = ["Sora Tonami <ms0503@outlook.com>"]
+edition = "2024"
+name = "ms0503-dev-db"
+resolver = "3"
+version = "0.1.0"
+
+[package.metadata.release]
+release = false
+
+[package.metadata.wask-pack.profile.release]
+wasm-opt = false

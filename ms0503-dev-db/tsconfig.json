@@ -14,8 +14,7 @@
         "target": "ES2022"
     },
     "include": [
-        "src/**/*.ts",
-        "worker-configuration.d.ts"
+        "src/**/*.ts"
     ],
     "references": [
         {

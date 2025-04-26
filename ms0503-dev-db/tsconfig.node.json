@@ -7,8 +7,6 @@
         "target": "ESNext"
     },
     "include": [
-        "drizzle.config.ts",
-        "eslint.config.ts",
-        "vite.config.ts"
+        "eslint.config.ts"
     ]
 }
