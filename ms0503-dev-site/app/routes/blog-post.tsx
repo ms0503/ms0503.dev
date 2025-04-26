@@ -29,9 +29,9 @@ export default function BlogPost({ loaderData: { body, post } }: Route.Component
     );
 }
 
-export async function loader({ params: { postId } }: Route.LoaderArgs) {
-    const post = fetch(`https://db.api.ms0503.dev/v1/post/${postId}`).then(res => res.json<Post>());
-    const body = fetch(`https://db.api.ms0503.dev/v1/post/${postId}/body`)
+export async function loader({ context: { fetchFromDB }, params: { postId } }: Route.LoaderArgs) {
+    const post = fetchFromDB(`/v1/post/${postId}`).then(res => res.json<Post>());
+    const body = fetchFromDB(`/v1/post/${postId}/body`)
         .then(res => res.text())
         .then(raw => mdxToReact(raw));
     return {
