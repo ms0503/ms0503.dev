@@ -254,6 +254,10 @@ fn with_post_get_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
                     Ok(c) => Response::from_json(&c),
                     Err(_) => Response::error("Failed to get created at", 500)
                 },
+                "description" => match post::get_description(&mut db, id).await {
+                    Ok(d) => Response::from_json(&d),
+                    Err(_) => Response::error("Failed to get description", 500)
+                },
                 "tags" => match post::get_tags(&mut db, id).await {
                     Ok(ts) => Response::from_json(&ts),
                     Err(_) => Response::error("Failed to get tags", 500)
@@ -281,7 +285,15 @@ fn with_post_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
                 let Ok(mut db) = ctx.env.d1("db") else {
                     return Response::error("Failed to connect to database", 500);
                 };
-                match post::create(&mut db, &body.title, &body.category_id, &body.body).await {
+                match post::create(
+                    &mut db,
+                    &body.title,
+                    &body.category_id,
+                    &body.body,
+                    body.description
+                )
+                .await
+                {
                     Ok(_) => Response::empty(),
                     Err(_) => Response::error("Failed to create post", 500)
                 }
@@ -337,6 +349,20 @@ fn with_post_put_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
                     match post::update_category_id(&mut db, &id, &category_id).await {
                         Ok(_) => Response::empty(),
                         Err(_) => Response::error("Failed to update category id", 500)
+                    }
+                }
+                "description" => {
+                    let description = {
+                        let description = req.text().await.unwrap();
+                        if description.len() == 0 {
+                            None
+                        } else {
+                            Some(description)
+                        }
+                    };
+                    match post::update_description(&mut db, &id, description).await {
+                        Ok(_) => Response::empty(),
+                        Err(_) => Response::error("Failed to update description", 500)
                     }
                 }
                 "title" => {

@@ -8,6 +8,7 @@ export type Category = {
 export type Post = {
     categoryId: Category['id'],
     createdAt: string,
+    description?: null | string,
     id: string,
     title: string,
     updatedAt: string

@@ -62,6 +62,15 @@ pub async fn get_created_at(db: &mut D1Database, id: &str) -> Result<String> {
         .unwrap())
 }
 
+pub async fn get_description(db: &mut D1Database, id: &str) -> Result<String> {
+    Ok(db
+        .prepare("select description from posts where id = ?1")
+        .bind(&[id.into()])?
+        .first(Some("description"))
+        .await?
+        .unwrap())
+}
+
 pub async fn get_many(db: &mut D1Database, count: i64, page: i64) -> Result<Vec<Post>> {
     db.prepare("select * from posts limit ?1 offset ?2")
         .bind(&[

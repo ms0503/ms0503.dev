@@ -16,6 +16,7 @@ pub struct Post {
     pub category_id: String,
     #[serde(rename = "createdAt")]
     pub created_at: String,
+    pub description: Option<String>,
     pub id: String,
     pub title: String,
     #[serde(rename = "updatedAt")]
@@ -26,6 +27,7 @@ pub struct Post {
 pub(crate) struct PostInternal {
     pub category_id: String,
     pub created_at: String,
+    pub description: Option<String>,
     pub id: String,
     pub title: String,
     pub updated_at: String
@@ -36,6 +38,7 @@ impl From<PostInternal> for Post {
         Self {
             category_id: value.category_id,
             created_at: value.created_at,
+            description: value.description,
             id: value.id,
             title: value.title,
             updated_at: value.updated_at
@@ -48,5 +51,6 @@ pub struct PostCreateRequest {
     pub body: String,
     #[serde(rename = "categoryId")]
     pub category_id: String,
+    pub description: Option<String>,
     pub title: String
 }

@@ -1,18 +1,8 @@
 use crate::post::Post;
 use crate::post::PostInternal;
-use crate::post_and_tag::PostAndTag;
 use crate::tag::Tag;
 use worker::D1Database;
 use worker::Result;
-
-pub async fn get(db: &mut D1Database, post_id: &str, tag_id: &str) -> Result<PostAndTag> {
-    Ok(db
-        .prepare("select * from post_and_tag where post_id = ?1, tag_id = ?2")
-        .bind(&[post_id.into(), tag_id.into()])?
-        .first(None)
-        .await?
-        .unwrap())
-}
 
 pub async fn get_posts_by_tag_id(db: &mut D1Database, id: &str) -> Result<Vec<Post>> {
     db
