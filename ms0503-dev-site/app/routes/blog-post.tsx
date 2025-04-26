@@ -1,9 +1,9 @@
 'use strict';
 
-import { getPostBodyById, getPostById } from 'ms0503-dev-db';
 import { Suspense, use } from 'react';
 import { mdxToReact } from '~/services/doc-convert.server';
 import type { Route } from './+types/blog-post';
+import type { Post } from 'ms0503-dev-db';
 
 function Body({ body: _body }: Pick<Route.ComponentProps['loaderData'], 'body'>) {
     return use(_body);
@@ -29,9 +29,11 @@ export default function BlogPost({ loaderData: { body, post } }: Route.Component
     );
 }
 
-export async function loader({ context: { db }, params: { postId } }: Route.LoaderArgs) {
-    const post = getPostById(db, postId);
-    const body = getPostBodyById(db, postId).then(raw => mdxToReact(raw));
+export async function loader({ params: { postId } }: Route.LoaderArgs) {
+    const post = fetch(`https://db.api.ms0503.dev/v1/post/${postId}`).then(res => res.json<Post>());
+    const body = fetch(`https://db.api.ms0503.dev/v1/post/${postId}/body`)
+        .then(res => res.text())
+        .then(raw => mdxToReact(raw));
     return {
         body,
         post

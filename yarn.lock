@@ -1445,13 +1445,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noble/hashes@npm:^1.1.5":
-  version: 1.7.2
-  resolution: "@noble/hashes@npm:1.7.2"
-  checksum: 10c0/b1411eab3c0b6691d847e9394fe7f1fcd45eeb037547c8f97e7d03c5068a499b4aef188e8e717eee67389dca4fee17d69d7e0f58af6c092567b0b76359b114b2
-  languageName: node
-  linkType: hard
-
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -1560,15 +1553,6 @@ __metadata:
   dependencies:
     which: "npm:^3.0.0"
   checksum: 10c0/d0696b8d9f7e16562cd1e520e4919000164be042b5c9998a45b4e87d41d9619fcecf2a343621c6fa85ed2671cbe87ab07e381a7faea4e5132c371dbb05893f31
-  languageName: node
-  linkType: hard
-
-"@paralleldrive/cuid2@npm:^2.2.2":
-  version: 2.2.2
-  resolution: "@paralleldrive/cuid2@npm:2.2.2"
-  dependencies:
-    "@noble/hashes": "npm:^1.1.5"
-  checksum: 10c0/af5826df93de437121308f4f4ce0b2eeb89b60bb57a1a6592fb89c0d40d311ad1d9f3f6a4db2cce6f2bcf572de1aa3f85704254e89b18ce61c41ebb06564c4ee
   languageName: node
   linkType: hard
 
@@ -3700,17 +3684,6 @@ __metadata:
   version: 16.5.0
   resolution: "dotenv@npm:16.5.0"
   checksum: 10c0/5bc94c919fbd955bf0ba44d33922a1e93d1078e64a1db5c30faeded1d996e7a83c55332cb8ea4fae5a9ca4d0be44cbceb95c5811e70f9f095298df09d1997dd9
-  languageName: node
-  linkType: hard
-
-"drizzle-cuid2@npm:^2":
-  version: 2.0.0
-  resolution: "drizzle-cuid2@npm:2.0.0"
-  dependencies:
-    "@paralleldrive/cuid2": "npm:^2.2.2"
-  peerDependencies:
-    drizzle-orm: ">=0.28.3"
-  checksum: 10c0/0b9f81b5e8595ba2fec9d408b2f281570047bd63965296d9b7e5c4bf45b242d4a2c273ad96fffef6bca3287a81ea5f35b47f9dfadf2f1b4bf0cd72a7f2c22b2e
   languageName: node
   linkType: hard
 
@@ -7491,9 +7464,6 @@ __metadata:
     "@types/react": "npm:^19"
     "@types/react-dom": "npm:^19"
     dotenv: "npm:^16"
-    drizzle-cuid2: "npm:^2"
-    drizzle-kit: "npm:^0.31"
-    drizzle-orm: "npm:^0.42"
     eslint: "npm:^9"
     fontmin: "npm:^2"
     isbot: "npm:^5"
