@@ -1,9 +1,14 @@
 'use strict';
 
 import './tailwind.css';
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import {
+    Links, Meta, Outlet, Scripts, ScrollRestoration
+} from 'react-router';
 import Footer from '~/components/footer';
 import Header from '~/components/header';
+import {
+    ATOM_URL, JSON_FEED_URL, RSS2_URL
+} from '~/lib/constants';
 import type { Route } from './+types/root';
 import type { PropsWithChildren } from 'react';
 
@@ -76,6 +81,21 @@ export const links: Route.LinksFunction = () => [
     {
         href: '/fonts/NotoSansMonoCJKjp-Regular.css',
         rel: 'stylesheet'
+    },
+    {
+        href: ATOM_URL,
+        rel: 'alternate',
+        type: 'application/atom+xml'
+    },
+    {
+        href: JSON_FEED_URL,
+        rel: 'alternate',
+        type: 'application/feed+json'
+    },
+    {
+        href: RSS2_URL,
+        rel: 'alternate',
+        type: 'application/rss+xml'
     }
 ];
 

@@ -206,12 +206,18 @@ export const rules: ESLintConfigParts = _ => [
             '@stylistic/object-curly-newline': [
                 'error',
                 {
-                    ExportDeclaration: 'never',
-                    ImportDeclaration: 'never',
+                    ExportDeclaration: {
+                        minProperties: 2
+                    },
+                    ImportDeclaration: {
+                        minProperties: 2
+                    },
                     ObjectExpression: {
                         minProperties: 1
                     },
-                    ObjectPattern: 'never'
+                    ObjectPattern: {
+                        minProperties: 2
+                    }
                 }
             ],
             '@stylistic/object-curly-spacing': [
@@ -254,6 +260,15 @@ export const rules: ESLintConfigParts = _ => [
                 'error',
                 'inside'
             ],
+            '@typescript-eslint/consistent-type-imports': [
+                'error',
+                {
+                    disallowTypeAnnotations: true,
+                    fixStyle: 'separate-type-imports',
+                    prefer: 'type-imports'
+                }
+            ],
+            '@typescript-eslint/no-namespace': 'off',
             '@typescript-eslint/no-unused-vars': [
                 'error',
                 {

@@ -1,6 +1,8 @@
 'use strict';
 
-import { Suspense, use } from 'react';
+import {
+    Suspense, use
+} from 'react';
 import { mdxToReact } from '~/services/doc-convert.server';
 import type { Route } from './+types/blog-post';
 import type { Post } from 'ms0503-dev-db';
@@ -14,7 +16,9 @@ function Title({ post: _post }: Pick<Route.ComponentProps['loaderData'], 'post'>
     return post.title;
 }
 
-export default function BlogPost({ loaderData: { body, post } }: Route.ComponentProps) {
+export default function BlogPost({ loaderData: {
+    body, post
+} }: Route.ComponentProps) {
     return (
         <>
             <h1>
@@ -29,7 +33,9 @@ export default function BlogPost({ loaderData: { body, post } }: Route.Component
     );
 }
 
-export async function loader({ context: { fetchFromDB }, params: { postId } }: Route.LoaderArgs) {
+export async function loader({
+    context: { fetchFromDB }, params: { postId }
+}: Route.LoaderArgs) {
     const post = fetchFromDB(`/v1/post/${postId}`).then(res => res.json<Post>());
     const body = fetchFromDB(`/v1/post/${postId}/body`)
         .then(res => res.text())
