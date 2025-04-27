@@ -18,8 +18,10 @@ export interface Author {
 export interface JsonFeed {
     authors: Author[];
     description: string;
+    favicon: `http://${string}` | `https://${string}`;
     feed_url: `http://${string}` | `https://${string}`;
     home_page_url: `http://${string}` | `https://${string}`;
+    icon: `http://${string}` | `https://${string}`;
     items: Item[];
     language: string;
     title: string;

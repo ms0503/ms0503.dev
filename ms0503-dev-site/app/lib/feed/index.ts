@@ -60,8 +60,10 @@ export function generateJsonFeed(items: JsonFeedItem[]): JsonFeed {
             }
         ],
         description: SITE_DESCRIPTION,
+        favicon: `${DOCUMENT_ROOT}/favicon.ico`,
         feed_url: JSON_FEED_URL,
         home_page_url: DOCUMENT_ROOT,
+        icon: `${DOCUMENT_ROOT}/icon-512.png`,
         items,
         language: 'ja',
         title: SITE_NAME,
