@@ -1,12 +1,17 @@
 'use strict';
 
+export interface Category {
+    '@_label': string;
+    '@_term': string;
+}
+
 export interface Link {
     '@_href': `http://${string}` | `https://${string}`;
     '@_rel': 'alternate' | 'related' | 'self';
 }
 
 export interface Entry {
-    category: string;
+    category: Category;
     id: string;
     link: Link;
     published: string;

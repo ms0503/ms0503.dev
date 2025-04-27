@@ -6,27 +6,29 @@ import {
 } from '~/lib/constants';
 import { generateAtom } from '~/lib/feed';
 import type { Route } from './+types/atom';
-import type { Post } from 'ms0503-dev-db';
+import type {
+    Category, Post
+} from 'ms0503-dev-db';
 import type { Entry } from '~/lib/feed/atom';
 
 export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
     const posts = await fetchFromDB(`/v1/post?count=${FEED_MAX_ITEMS}`).then(res => res.json<Post[]>());
     const categories = await (
         async () => {
-            const categories: Promise<[ string, string ]>[] = [];
+            const categories: Promise<[ string, Category ]>[] = [];
             for(const post of posts) {
                 categories.push(
-                    fetchFromDB(`/v1/category/${post.categoryId}/name`)
-                        .then(res => res.text())
-                        .then<[ string, string ]>(name => [
+                    fetchFromDB(`/v1/category/${post.categoryId}`)
+                        .then(res => res.json<Category>())
+                        .then<[ string, Category ]>(category => [
                             post.id,
-                            name
+                            category
                         ])
                 );
             }
             return Promise
                 .all(categories)
-                .then<{ [id: string]: string }>(categories => categories.reduce(
+                .then<{ [id: string]: Category }>(categories => categories.reduce(
                     (acc, curr) => (
                         {
                             ...acc,
@@ -39,7 +41,10 @@ export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
     )();
     const entries = posts.map<Entry>(post => (
         {
-            category: categories[post.categoryId]!,
+            category: {
+                '@_label': categories[post.id]!.name,
+                '@_term': categories[post.id]!.id
+            },
             id: post.id,
             link: {
                 '@_href': `${BLOG_POSTS_ROOT}/${post.id}`,
