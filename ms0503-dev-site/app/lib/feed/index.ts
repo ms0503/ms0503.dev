@@ -33,6 +33,7 @@ export function generateAtom(entries: AtomEntry[]) {
                 uri: DOCUMENT_ROOT
             },
             entry: entries,
+            icon: `${DOCUMENT_ROOT}/icon-192.png`,
             id: '',
             link: {
                 '@_href': DOCUMENT_ROOT,

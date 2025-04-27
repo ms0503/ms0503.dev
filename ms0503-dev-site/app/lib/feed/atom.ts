@@ -30,6 +30,7 @@ export interface Feed {
     '@_xmlns': 'http://www.w3.org/2005/Atom';
     author: Author;
     entry: Entry[];
+    icon: `http://${string}` | `https://${string}`;
     id: string;
     link: Link;
     rights: string;
