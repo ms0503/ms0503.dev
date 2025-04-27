@@ -45,7 +45,7 @@ export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
                 '@_label': categories[post.id]!.name,
                 '@_term': categories[post.id]!.id
             },
-            id: post.id,
+            id: `tag:ms0503.dev,${dayjs(post.updatedAt).format('YYYY-MM-DD')}:/blog/posts/${post.id}`,
             link: {
                 '@_href': `${BLOG_POSTS_ROOT}/${post.id}`,
                 '@_rel': 'alternate'

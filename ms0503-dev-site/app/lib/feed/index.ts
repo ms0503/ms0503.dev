@@ -34,7 +34,9 @@ export function generateAtom(entries: AtomEntry[]) {
             },
             entry: entries,
             icon: `${DOCUMENT_ROOT}/icon-192.png`,
-            id: '',
+            id: `tag:ms0503.dev,${(
+                0 < entries.length ? dayjs(entries[0]!.updated) : dayjs()
+            ).format('YYYY-MM-DD')}:/`,
             link: {
                 '@_href': DOCUMENT_ROOT,
                 '@_rel': 'alternate'
