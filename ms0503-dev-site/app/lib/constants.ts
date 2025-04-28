@@ -1,9 +1,5 @@
 'use strict';
 
-// formats
-
-export const RFC822_DATETIME_FORMAT = 'ddd, DD MMM YYYY hh:mm:ss ZZ';
-
 // site info
 
 export const SITE_DESCRIPTION = 'Webとゲーム開発をかじってる技術オタクのサイト。';

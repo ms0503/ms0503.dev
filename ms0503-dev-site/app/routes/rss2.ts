@@ -42,7 +42,7 @@ export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
             category: categories[post.id]!,
             description: post.description ?? undefined,
             link: `${BLOG_POSTS_ROOT}/${post.id}`,
-            pubDate: dayjs(post.createdAt),
+            pubDate: dayjs(post.createdAt).toString(),
             title: post.title
         }
     ));

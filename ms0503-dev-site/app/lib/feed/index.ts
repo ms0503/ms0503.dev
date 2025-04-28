@@ -3,7 +3,7 @@
 import dayjs from 'dayjs';
 import { XMLBuilder } from 'fast-xml-parser';
 import {
-    DOCUMENT_ROOT, JSON_FEED_URL, RFC822_DATETIME_FORMAT, SITE_DESCRIPTION, SITE_NAME
+    DOCUMENT_ROOT, JSON_FEED_URL, SITE_DESCRIPTION, SITE_NAME
 } from '~/lib/constants';
 import type {
     AtomDocument, Entry as AtomEntry
@@ -89,12 +89,12 @@ export function generateRss2(items: Rss2Item[]) {
                 docs: 'https://cyber.harvard.edu/rss',
                 item: items,
                 language: 'ja',
-                lastBuildDate: dayjs().format(RFC822_DATETIME_FORMAT),
+                lastBuildDate: dayjs().toString(),
                 link: DOCUMENT_ROOT,
                 managingEditor: 'ms0503@outlook.com (Sora Tonami)',
                 pubDate: (
                     0 < items.length ? dayjs(items[0]!.pubDate) : dayjs()
-                ).format(RFC822_DATETIME_FORMAT),
+                ).toString(),
                 title: SITE_NAME,
                 webMaster: 'ms0503@outlook.com (Sora Tonami)'
             }
