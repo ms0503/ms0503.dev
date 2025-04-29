@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "allowJs": false,
+        "allowSyntheticDefaultImports": true,
         "baseUrl": ".",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
@@ -19,7 +20,6 @@
         "noImplicitOverride": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
-        "noImplicitUseStrict": true,
         "noUncheckedIndexedAccess": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
