@@ -100,12 +100,29 @@
         "type": "github"
       }
     },
+    "nixpkgs-yarn-berry": {
+      "locked": {
+        "lastModified": 1745863646,
+        "narHash": "sha256-WW59HWHE6rFbGBq7v4jRq8aFJMUVy0tgLvixbMyzddc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "42a048e2100946e4707941d97bc1038623fdb293",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "fenix": "fenix",
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-yarn-berry": "nixpkgs-yarn-berry",
         "systems": "systems",
         "treefmt-nix": "treefmt-nix"
       }

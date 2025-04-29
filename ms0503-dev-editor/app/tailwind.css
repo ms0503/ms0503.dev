@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/* stylelint-disable import-notation */
+@import "tailwindcss";
+
+@theme {
+    --font-mono: "Noto Sans Mono", "Noto Sans Mono CJK JP", "Source Code Pro", "Source Han Code JP", ui-monospace, monospace, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-sans: "Noto Sans CJK JP", "Helvetica Neue", helvetica, arial, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", meiryo, ui-sans-serif, system-ui, sans-serif, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+@layer base {
+    html, body {
+        @apply font-sans;
+        @apply bg-neutral-100 text-neutral-800;
+        @apply dark:bg-neutral-800 dark:text-neutral-200;
+
+        @media (prefers-color-scheme: dark) {
+            color-scheme: dark;
+        }
+    }
+
+    body {
+        @apply flex flex-col min-h-screen;
+    }
+
+    a {
+        @apply no-underline;
+        @apply text-blue-500;
+    }
+
+    p {
+        @apply mb-2;
+    }
+
+    h1 {
+        @apply font-bold mb-4 text-4xl;
+    }
+
+    input {
+        @apply border-2 px-2 py-1 rounded-md;
+        @apply border-neutral-800;
+        @apply dark:border-neutral-200;
+    }
+}

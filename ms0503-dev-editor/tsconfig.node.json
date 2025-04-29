@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
+        "allowJs": true,
         "allowSyntheticDefaultImports": true,
+        "checkJs": true,
         "composite": true,
         "module": "ESNext",
         "moduleResolution": "Bundler",
@@ -8,6 +10,10 @@
     },
     "include": [
         "eslint.config.ts",
-        "vite.config.ts"
+        "load-context.ts",
+        "react-router.config.ts",
+        "stylelint.config.mjs",
+        "vite.config.ts",
+        "worker-configuration.d.ts"
     ]
 }

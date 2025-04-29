@@ -1,6 +1,9 @@
 {
     "compilerOptions": {
-        "allowImportingTsExtensions": true,
+        "allowJs": false,
+        "baseUrl": ".",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
         "isolatedModules": true,
         "jsx": "react-jsx",
         "lib": [
@@ -12,16 +15,39 @@
         "moduleResolution": "Bundler",
         "noEmit": true,
         "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noImplicitUseStrict": true,
+        "noUncheckedIndexedAccess": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
+        "paths": {
+            "~/*": [
+                "./app/*"
+            ]
+        },
         "resolveJsonModule": true,
+        "rootDirs": [
+            ".",
+            "./.react-router/types"
+        ],
         "skipLibCheck": true,
         "strict": true,
+        "strictBindCallApply": true,
+        "strictBuiltinIteratorReturn": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true,
         "target": "ES2022",
         "useDefineForClassFields": true
     },
     "include": [
-        "src"
+        ".react-router/types/**/*",
+        "app/**/*.ts",
+        "app/**/*.tsx",
+        "worker-configuration.d.ts"
     ],
     "references": [
         {

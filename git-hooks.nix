@@ -21,6 +21,7 @@
             editorconfig-checker = {
               enable = true;
               excludes = [
+                ".*/Cargo.lock"
                 ".*/worker-configuration.d.ts"
                 ".idea"
                 "flake.lock"

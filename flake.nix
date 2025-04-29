@@ -16,6 +16,7 @@
       url = "github:cachix/git-hooks.nix";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-yarn-berry.url = "github:NixOS/nixpkgs/master";
     systems = {
       flake = false;
       url = "github:nix-systems/default";
@@ -42,6 +43,12 @@
         }:
         {
           devShells.default = pkgs.mkShell {
+            LD_LIBRARY_PATH = lib.makeLibraryPath (
+              with pkgs;
+              [
+                zlib
+              ]
+            );
             packages = with pkgs; [
               (
                 with inputs'.fenix.packages;
@@ -70,11 +77,20 @@
               pkg-config
               webkitgtk_4_1
               worker-build
+              xdg-utils
             ];
             shellHook = ''
               ${config.pre-commit.installationScript}
+              export GSETTINGS_SCHEMA_DIR="${pkgs.glib.dev}/share/glib-2.0/schemas"
               yarn install
             '';
+          };
+          packages.editor = pkgs.callPackage ./nix/editor.nix {
+            inherit (inputs'.nixpkgs-yarn-berry.legacyPackages) yarn-berry;
+            rustPlatform = pkgs.makeRustPlatform {
+              cargo = inputs'.fenix.packages.latest.toolchain;
+              rustc = inputs'.fenix.packages.latest.toolchain;
+            };
           };
         };
       systems = import systems;
