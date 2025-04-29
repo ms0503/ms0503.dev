@@ -1,3 +1,3 @@
 [workspace]
-members = ["ms0503-dev-db", "ms0503-dev-editor/src-tauri"]
+members = ["ms0503-dev-db", "ms0503-dev-editor"]
 resolver = "3"

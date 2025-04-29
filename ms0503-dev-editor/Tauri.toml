@@ -14,8 +14,8 @@ width = 800
 [build]
 before-build-command = "yarn build"
 before-dev-command = "yarn dev"
-dev-url = "http://localhost:1420"
-frontend-dist = "../build/client"
+dev-url = "http://localhost:5173"
+frontend-dist = "build/client"
 
 [bundle]
 active = true
@@ -26,4 +26,10 @@ icon = [
     "icons/icon.icns",
     "icons/icon.ico"
 ]
-targets = ["app", "deb", "dmg", "nsis", "rpm"]
+targets = [
+    "app",
+    "deb",
+    "dmg",
+    "nsis",
+    "rpm"
+]

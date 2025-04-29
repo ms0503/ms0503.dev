@@ -24,6 +24,10 @@ export default defineConfig({
         target: process.env.TAURI_ENV_PLATFORM === 'windows' ? 'chrome105' : 'safari13'
     },
     clearScreen: false,
+    envPrefix: [
+        'TAURI_ENV_*',
+        'VITE_'
+    ],
     plugins: [
         reactRouter(),
         tailwindcss(),
@@ -37,11 +41,11 @@ export default defineConfig({
     server: {
         hmr: host ? {
             host,
-            port: 1421,
+            port: 5174,
             protocol: 'ws'
         } : undefined,
         host: host || false,
-        port: 1420,
+        port: 5173,
         strictPort: true,
         watch: {
             ignored: [

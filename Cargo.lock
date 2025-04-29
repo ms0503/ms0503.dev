@@ -2127,6 +2127,7 @@ dependencies = [
 name = "ms0503-dev-editor"
 version = "0.1.0"
 dependencies = [
+    "ms0503-dev-db",
  "reqwest",
  "serde",
  "serde_json",

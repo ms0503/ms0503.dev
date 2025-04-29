@@ -6,6 +6,10 @@ version = "2"
 serde_json = "1"
 tauri-plugin-opener = "2"
 
+[dependencies.ms0503-dev-db]
+default-features = false
+path = "../ms0503-dev-db"
+
 [dependencies.reqwest]
 default-features = false
 features = ["json", "rustls-tls"]
