@@ -27,6 +27,7 @@
                 "flake.lock"
                 "ms0503-dev-db/dist"
                 "ms0503-dev-site/noto-sans-mono-cjk-jp-include.txt"
+                "nix/missing-hashes.json"
                 "yarn.lock"
               ];
             };

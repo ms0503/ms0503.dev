@@ -1,60 +1,47 @@
 {
-  cairo,
   cargo-tauri,
-  gdk-pixbuf,
-  glib,
-  gtk3,
+  glib-networking,
   lib,
   libsoup_3,
+  makeBinaryWrapper,
+  mold,
   nodejs-slim,
   openssl,
-  patchelf,
   pkg-config,
   rpmextract,
   rustPlatform,
+  stdenv,
   webkitgtk_4_1,
+  wrapGAppsHook,
   yarn-berry,
 }:
 let
-  cargoToml = builtins.fromTOML (builtins.readFile ../ms0503-dev-editor/src-tauri/Cargo.toml);
-  libraries = [
-    cairo
-    gdk-pixbuf
-    glib
-    gtk3
-    libsoup_3
-    openssl
-    webkitgtk_4_1
-  ];
+  cargoToml = builtins.fromTOML (builtins.readFile ../ms0503-dev-editor/Cargo.toml);
   src = ../.;
   yarnHash = "sha256-N4PJhw3JXVr4ctFVAI5pqvAdcrZasaGXdT7+pnZZCNw=";
 in
 rustPlatform.buildRustPackage {
   inherit src;
   inherit (cargoToml.package) version;
+  RUSTFLAGS = "-Clink-arg=-fuse-ld=mold";
   buildAndTestSubdir = "ms0503-dev-editor";
-  buildPhase = ''
-    runHook preBuild
-    yarn workspace ms0503-dev-editor run tauri build
-    runHook postBuild
-  '';
-  buildInputs = libraries;
+  buildInputs =
+    [
+      openssl
+    ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [
+      glib-networking
+      libsoup_3
+      makeBinaryWrapper
+      webkitgtk_4_1
+    ];
   cargoLock.lockFile = ../Cargo.lock;
-  installPhase = ''
-    runHook preInstall
-    install -dm755 "$out"
-    cd target/release/bundle/rpm
-    rpmextract "$pname-$version-1.x86_64.rpm"
-    cp -r usr/* "$out"
-    runHook postInstall
-  '';
   meta = {
+    broken = stdenv.hostPlatform.isDarwin;
     description = "An editor for writing posts of The Seaside Snippet Shack";
     license = lib.licenses.mit;
     mainProgram = "ms0503-dev-editor";
-    platforms = [
-      "x86_64-linux"
-    ];
+    platforms = lib.platforms.unix;
     sourceProvenance = with lib.sourceTypes; [
       fromSource
     ];
@@ -62,10 +49,11 @@ rustPlatform.buildRustPackage {
   missingHashes = ./missing-hashes.json;
   nativeBuildInputs = [
     cargo-tauri.hook
+    mold
     nodejs-slim
-    patchelf
     pkg-config
     rpmextract
+    wrapGAppsHook
     yarn-berry
     yarn-berry.yarnBerryConfigHook
   ];
@@ -74,10 +62,12 @@ rustPlatform.buildRustPackage {
     hash = yarnHash;
     missingHashes = ./missing-hashes.json;
   };
-  pname = "ms0503-dev-editor";
-  postFixup = ''
-    patchelf --add-rpath "$rpath" "$out/bin/$pname"
+  passthru = {
+    inherit (yarn-berry) yarn-berry-fetcher;
+  };
+  pname = cargoToml.package.name;
+  postInstall = lib.optionalString stdenv.hostPlatform.isLinux ''
+    wrapProgram "$out/bin/$pname" --set APPIMAGE "$pname"
   '';
-  rpath = lib.makeLibraryPath libraries;
   useFetchCargoVendor = true;
 }

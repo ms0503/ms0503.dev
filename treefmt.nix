@@ -83,6 +83,7 @@
             command = "${jsonfmt}/bin/jf";
             excludes = [
               "ms0503-dev-editor/gen"
+              "nix/missing-hashes.json"
             ];
             options = lib.mkForce [ ];
             package = jsonfmt;

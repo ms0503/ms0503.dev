@@ -46,6 +46,13 @@
             LD_LIBRARY_PATH = lib.makeLibraryPath (
               with pkgs;
               [
+                cairo
+                gdk-pixbuf
+                glib
+                gtk3
+                libsoup_3
+                openssl
+                webkitgtk_4_1
                 zlib
               ]
             );
