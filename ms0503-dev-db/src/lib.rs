@@ -3,20 +3,31 @@
 use crate::category::CategoryCreateRequest;
 use crate::post::PostCreateRequest;
 use crate::tag::TagCreateRequest;
+#[cfg(feature = "worker")]
 use dotenvy::dotenv;
 pub use models::*;
+#[cfg(feature = "worker")]
 use worker::Context;
+#[cfg(feature = "worker")]
 use worker::Env;
+#[cfg(feature = "worker")]
 use worker::Headers;
+#[cfg(feature = "worker")]
 use worker::Request;
+#[cfg(feature = "worker")]
 use worker::Response;
+#[cfg(feature = "worker")]
 use worker::Result;
+#[cfg(feature = "worker")]
 use worker::RouteContext;
+#[cfg(feature = "worker")]
 use worker::Router;
+#[cfg(feature = "worker")]
 use worker::event;
 
 mod models;
 
+#[cfg(feature = "worker")]
 #[event(fetch, respond_with_errors)]
 async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
     dotenv().ok();
@@ -26,24 +37,28 @@ async fn main(req: Request, env: Env, _ctx: Context) -> Result<Response> {
         .await
 }
 
+#[cfg(feature = "worker")]
 fn with_category_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     with_category_put_routes(with_category_post_routes(with_category_get_routes(
         with_category_delete_routes(router)
     )))
 }
 
+#[cfg(feature = "worker")]
 fn with_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     with_post_put_routes(with_post_post_routes(with_post_get_routes(
         with_post_delete_routes(router)
     )))
 }
 
+#[cfg(feature = "worker")]
 fn with_tag_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     with_tag_put_routes(with_tag_post_routes(with_tag_get_routes(
         with_tag_delete_routes(router)
     )))
 }
 
+#[cfg(feature = "worker")]
 fn with_category_delete_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router.delete_async("/v1/category/:id", |req, ctx| {
         with_check_auth_header(req, ctx, |_, ctx| async move {
@@ -62,6 +77,7 @@ fn with_category_delete_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D
     })
 }
 
+#[cfg(feature = "worker")]
 fn with_category_get_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router
         .get_async("/v1/category", |req, ctx| async move {
@@ -115,6 +131,7 @@ fn with_category_get_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
         })
 }
 
+#[cfg(feature = "worker")]
 fn with_category_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router.post_async("/v1/category", |req, ctx| {
         with_check_auth_header(req, ctx, |mut req, ctx| async move {
@@ -132,6 +149,7 @@ fn with_category_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> 
     })
 }
 
+#[cfg(feature = "worker")]
 fn with_category_put_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router.put_async("/v1/category/:id/:col", |req, ctx| {
         with_check_auth_header(req, ctx, |mut req, ctx| async move {
@@ -159,6 +177,7 @@ fn with_category_put_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     })
 }
 
+#[cfg(feature = "worker")]
 fn with_post_delete_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router
         .delete_async("/v1/post/:id", |req, ctx| {
@@ -194,6 +213,7 @@ fn with_post_delete_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
         })
 }
 
+#[cfg(feature = "worker")]
 fn with_post_get_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router
         .get_async("/v1/post", |req, ctx| async move {
@@ -275,6 +295,7 @@ fn with_post_get_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
         })
 }
 
+#[cfg(feature = "worker")]
 fn with_post_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router
         .post_async("/v1/post", |req, ctx| {
@@ -320,6 +341,7 @@ fn with_post_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
         })
 }
 
+#[cfg(feature = "worker")]
 fn with_post_put_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router.put_async("/v1/post/:id/:col", |req, ctx| {
         with_check_auth_header(req, ctx, |mut req, ctx| async move {
@@ -381,6 +403,7 @@ fn with_post_put_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     })
 }
 
+#[cfg(feature = "worker")]
 fn with_tag_delete_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router.delete_async("/v1/tag/:id", |req, ctx| {
         with_check_auth_header(req, ctx, |_, ctx| async move {
@@ -399,6 +422,7 @@ fn with_tag_delete_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     })
 }
 
+#[cfg(feature = "worker")]
 fn with_tag_get_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router
         .get_async("/v1/tag", |req, ctx| async move {
@@ -456,6 +480,7 @@ fn with_tag_get_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
         })
 }
 
+#[cfg(feature = "worker")]
 fn with_tag_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router.post_async("/v1/tag", |req, ctx| {
         with_check_auth_header(req, ctx, |mut req, ctx| async move {
@@ -473,6 +498,7 @@ fn with_tag_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     })
 }
 
+#[cfg(feature = "worker")]
 fn with_tag_put_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     router.put_async("/v1/tag/:id/:col", |req, ctx| {
         with_check_auth_header(req, ctx, |mut req, ctx| async move {
@@ -500,6 +526,7 @@ fn with_tag_put_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
     })
 }
 
+#[cfg(feature = "worker")]
 async fn with_check_auth_header<'a, D, T>(
     req: Request,
     ctx: RouteContext<D>,

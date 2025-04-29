@@ -1,23 +1,56 @@
 [dependencies]
-console_error_panic_hook = "0.1"
-cuid2 = "0.1"
-dotenvy = "0.15"
 serde_json = "1"
-worker-macros = "0.5"
+
+[dependencies.console_error_panic_hook]
+optional = true
+version = "0.1"
+
+[dependencies.cuid2]
+optional = true
+version = "0.1"
+
+[dependencies.dotenvy]
+optional = true
+version = "0.15"
 
 [dependencies.serde]
-features = ["derive"]
+features = [
+    "derive"
+]
 version = "1"
 
 [dependencies.worker]
-features = ["d1"]
+features = [
+    "d1"
+]
+optional = true
 version = "0.5"
 
+[dependencies.worker-macros]
+optional = true
+version = "0.5"
+
+[features]
+default = [
+    "worker"
+]
+worker = [
+    "dep:console_error_panic_hook",
+    "dep:cuid2",
+    "dep:dotenvy",
+    "dep:worker",
+    "dep:worker-macros"
+]
+
 [lib]
-crate-type = ["cdylib"]
+crate-type = [
+    "cdylib"
+]
 
 [package]
-authors = ["Sora Tonami <ms0503@outlook.com>"]
+authors = [
+    "Sora Tonami <ms0503@outlook.com>"
+]
 edition = "2024"
 name = "ms0503-dev-db"
 resolver = "3"
