@@ -27,9 +27,5 @@ icon = [
     "icons/icon.ico"
 ]
 targets = [
-    "app",
-    "deb",
-    "dmg",
-    "nsis",
     "rpm"
 ]
