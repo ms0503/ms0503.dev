@@ -49,7 +49,14 @@ export default defineConfig({
         strictPort: true,
         watch: {
             ignored: [
-                '**/src-tauri/**'
+                'Cargo.toml',
+                'Tauri.toml',
+                'build.rs',
+                'capabilities',
+                'gen',
+                'icons',
+                'rustfmt.toml',
+                'src'
             ]
         }
     }
