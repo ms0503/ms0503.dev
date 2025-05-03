@@ -91,6 +91,9 @@
           shellcheck.excludes = [
             ".envrc"
           ];
+          taplo.excludes = [
+            "Cargo.lock"
+          ];
         };
       };
     };

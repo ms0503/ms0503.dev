@@ -15,9 +15,15 @@
               enable = true;
               excludes = [
                 "ms0503-dev-editor/gen"
+                "nix/missing-hashes.json"
               ];
             };
-            check-toml.enable = true;
+            check-toml = {
+              enable = true;
+              excludes = [
+                "Cargo.lock"
+              ];
+            };
             editorconfig-checker = {
               enable = true;
               excludes = [
