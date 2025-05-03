@@ -21,11 +21,11 @@
             editorconfig-checker = {
               enable = true;
               excludes = [
-                ".*/Cargo.lock"
                 ".*/worker-configuration.d.ts"
                 ".idea"
+                "Cargo.lock"
                 "flake.lock"
-                "ms0503-dev-db/dist"
+                "ms0503-dev-db/build"
                 "ms0503-dev-site/noto-sans-mono-cjk-jp-include.txt"
                 "nix/missing-hashes.json"
                 "yarn.lock"
