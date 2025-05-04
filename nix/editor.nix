@@ -8,20 +8,20 @@
   nodejs-slim,
   openssl,
   pkg-config,
-  rpmextract,
   rustPlatform,
   stdenv,
   webkitgtk_4_1,
-  wrapGAppsHook,
+  wrapGAppsHook3,
   yarn-berry,
 }:
 let
   cargoToml = builtins.fromTOML (builtins.readFile ../ms0503-dev-editor/Cargo.toml);
+  missingHashes = ./missing-hashes.json;
   src = ../.;
   yarnHash = "sha256-N4PJhw3JXVr4ctFVAI5pqvAdcrZasaGXdT7+pnZZCNw=";
 in
 rustPlatform.buildRustPackage {
-  inherit src;
+  inherit missingHashes src;
   inherit (cargoToml.package) version;
   RUSTFLAGS = "-Clink-arg=-fuse-ld=mold";
   buildAndTestSubdir = "ms0503-dev-editor";
@@ -32,7 +32,6 @@ rustPlatform.buildRustPackage {
     ++ lib.optionals stdenv.hostPlatform.isLinux [
       glib-networking
       libsoup_3
-      makeBinaryWrapper
       webkitgtk_4_1
     ];
   cargoLock.lockFile = ../Cargo.lock;
@@ -46,21 +45,18 @@ rustPlatform.buildRustPackage {
       fromSource
     ];
   };
-  missingHashes = ./missing-hashes.json;
   nativeBuildInputs = [
     cargo-tauri.hook
     mold
     nodejs-slim
     pkg-config
-    rpmextract
-    wrapGAppsHook
+    wrapGAppsHook3
     yarn-berry
     yarn-berry.yarnBerryConfigHook
-  ];
+  ] ++ lib.optional stdenv.hostPlatform.isLinux makeBinaryWrapper;
   offlineCache = yarn-berry.fetchYarnBerryDeps {
-    inherit src;
+    inherit missingHashes src;
     hash = yarnHash;
-    missingHashes = ./missing-hashes.json;
   };
   passthru = {
     inherit (yarn-berry) yarn-berry-fetcher;
