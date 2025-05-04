@@ -16,7 +16,6 @@
       url = "github:cachix/git-hooks.nix";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-yarn-berry.url = "github:NixOS/nixpkgs/master";
     systems = {
       flake = false;
       url = "github:nix-systems/default";
@@ -46,12 +45,18 @@
             LD_LIBRARY_PATH = lib.makeLibraryPath (
               with pkgs;
               [
+                at-spi2-atk
+                atkmm
                 cairo
                 gdk-pixbuf
                 glib
+                gobject-introspection
                 gtk3
+                harfbuzz
+                librsvg
                 libsoup_3
                 openssl
+                pango
                 webkitgtk_4_1
                 zlib
               ]
@@ -64,36 +69,20 @@
                   targets.wasm32-unknown-unknown.latest.rust-std
                 ]
               )
-              at-spi2-atk
-              atkmm
-              cairo
               cargo-generate
               cargo-tauri
               fontforge
-              gdk-pixbuf
-              glib
-              gobject-introspection
-              gtk3
-              harfbuzz
-              librsvg
-              libsoup_3
-              nodePackages.yarn
               nodejs-slim
-              openssl
-              pango
-              pkg-config
-              webkitgtk_4_1
               worker-build
               xdg-utils
+              yarn-berry
             ];
             shellHook = ''
               ${config.pre-commit.installationScript}
-              export GSETTINGS_SCHEMA_DIR="${pkgs.glib.dev}/share/glib-2.0/schemas"
               yarn install
             '';
           };
           packages.editor = pkgs.callPackage ./nix/editor.nix {
-            inherit (inputs'.nixpkgs-yarn-berry.legacyPackages) yarn-berry;
             rustPlatform = pkgs.makeRustPlatform {
               cargo = inputs'.fenix.packages.latest.toolchain;
               rustc = inputs'.fenix.packages.latest.toolchain;
