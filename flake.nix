@@ -69,10 +69,18 @@
                   targets.wasm32-unknown-unknown.latest.rust-std
                 ]
               )
+              at-spi2-atk
+              cairo
               cargo-generate
               cargo-tauri
               fontforge
+              gdk-pixbuf
+              glib
+              gtk3
               nodejs-slim
+              pango
+              pkg-config
+              webkitgtk_4_1
               worker-build
               xdg-utils
               yarn-berry
