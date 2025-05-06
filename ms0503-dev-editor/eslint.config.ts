@@ -16,9 +16,7 @@ const compat = new FlatCompat({
 });
 
 const gitignore = join(__dirname, '.gitignore');
-const tauriGitignore = join(__dirname, 'src-tauri/.gitignore');
 
 export default config(compat, [
-    includeIgnoreFile(gitignore),
-    includeIgnoreFile(tauriGitignore)
+    includeIgnoreFile(gitignore)
 ]);
