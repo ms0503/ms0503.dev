@@ -44,7 +44,8 @@ worker = [
 
 [lib]
 crate-type = [
-    "cdylib"
+    "cdylib",
+    "rlib"
 ]
 
 [package]

@@ -1,0 +1,11 @@
+#:shcema: ../gen/schemas/desktop-schema.json
+
+description = "Capability for the main window"
+identifier = "default"
+permissions = [
+    "core:default",
+    "http:default"
+]
+windows = [
+    "main"
+]

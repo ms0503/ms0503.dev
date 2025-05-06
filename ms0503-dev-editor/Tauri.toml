@@ -1,9 +1,13 @@
 #:schema: https://schema.tauri.app/config/2
+
 identifier = "dev.ms0503.ms0503-dev-editor"
 product-name = "ms0503-dev-editor"
 version = "0.1.0"
 
 [app.security]
+capabilities = [
+    "default"
+]
 csp = ""
 
 [[app.windows]]

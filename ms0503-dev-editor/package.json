@@ -2,7 +2,7 @@
     "dependencies": {
         "@react-router/node": "^7",
         "@tauri-apps/api": "^2",
-        "@tauri-apps/plugin-opener": "^2",
+        "@tauri-apps/plugin-http": "^2",
         "drizzle-orm": "^0.42",
         "isbot": "^5",
         "ms0503-dev-db": "workspace:*",
