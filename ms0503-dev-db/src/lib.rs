@@ -142,7 +142,7 @@ fn with_category_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> 
                 return Response::error("Failed to connect to database", 500);
             };
             match category::create(&mut db, &body.name).await {
-                Ok(_) => Response::empty(),
+                Ok(id) => Response::from_json(&id),
                 Err(_) => Response::error("Failed to create category", 500)
             }
         })
@@ -315,7 +315,7 @@ fn with_post_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
                 )
                 .await
                 {
-                    Ok(_) => Response::empty(),
+                    Ok(id) => Response::from_json(&id),
                     Err(_) => Response::error("Failed to create post", 500)
                 }
             })
@@ -491,7 +491,7 @@ fn with_tag_post_routes<'a, D: 'a>(router: Router<'a, D>) -> Router<'a, D> {
                 return Response::error("Failed to connect to database", 500);
             };
             match tag::create(&mut db, &body.name).await {
-                Ok(_) => Response::empty(),
+                Ok(id) => Response::from_json(&id),
                 Err(_) => Response::error("Failed to create tag", 500)
             }
         })

@@ -7,16 +7,17 @@ pub async fn create(
     category_id: &str,
     body: &str,
     description: Option<String>
-) -> Result<()> {
+) -> Result<String> {
+    let id = cuid2::create_id();
     db.prepare("insert into posts (category_id, description, id, title) values (?1, ?2, ?3, ?4); insert into post_bodies (body, id) values (?5, ?3)")
         .bind(&[
             category_id.into(),
             description.into(),
-            cuid2::create_id().into(),
+            (&id).into(),
             title.into(),
             body.into()
         ])?
         .run()
         .await?;
-    Ok(())
+    Ok(id)
 }
