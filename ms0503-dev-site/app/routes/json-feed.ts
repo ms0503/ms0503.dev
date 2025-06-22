@@ -7,28 +7,32 @@ import {
 import { generateJsonFeed } from '~/lib/feed';
 import type { Route } from './+types/json-feed';
 import type {
-    Post, Tag
+    Category, Post, Tag
 } from 'ms0503-dev-db';
 import type { Item } from '~/lib/feed/json-feed';
 
-export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
-    const posts = await fetchFromDB(`/v1/post?count=${FEED_MAX_ITEMS}`).then(res => res.json<Post[]>());
+export async function loader({ context: { db } }: Route.LoaderArgs) {
+    const posts = (
+        await db.prepare('select * from posts limit ?').bind(FEED_MAX_ITEMS).all<Post>()
+    ).results;
     const categories = await (
         async () => {
-            const categories: Promise<[ string, string ]>[] = [];
+            const categories: Promise<[ string, Category ]>[] = [];
             for(const post of posts) {
                 categories.push(
-                    fetchFromDB(`/v1/category/${post.categoryId}/name`)
-                        .then(res => res.text())
-                        .then<[ string, string ]>(name => [
+                    db.prepare('select * from categories where id = ?')
+                        .bind(post.categoryId)
+                        .first<Category>()
+                        .then(cat => cat!)
+                        .then<[ string, Category ]>(cat => [
                             post.id,
-                            name
+                            cat
                         ])
                 );
             }
             return Promise
                 .all(categories)
-                .then<{ [id: string]: string }>(categories => categories.reduce(
+                .then<{ [id: string]: Category }>(categories => categories.reduce(
                     (acc, curr) => (
                         {
                             ...acc,
@@ -44,12 +48,13 @@ export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
             const tags: Promise<[ string, string[] ]>[] = [];
             for(const post of posts) {
                 tags.push(
-                    fetchFromDB(`/v1/post/${post.id}/tags`)
-                        .then(res => res.json<Tag[]>())
-                        .then(tags => tags.map(tag => tag.name))
-                        .then<[ string, string[] ]>(tags => [
+                    db.prepare(
+                        'select tags.* from tags inner join posts_and_tags on tags.id = posts_and_tags.tag_id where posts_and_tags.post_id = ?')
+                        .bind(post.id)
+                        .all<Tag>()
+                        .then<[ string, string[] ]>(result => [
                             post.id,
-                            tags
+                            result.results.map(tag => tag.name)
                         ])
                 );
             }
@@ -72,7 +77,7 @@ export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
             date_published: dayjs(post.createdAt).toISOString(),
             id: post.id,
             tags: [
-                categories[post.id]!,
+                categories[post.id]!.name,
                 ...tags[post.id]!
             ],
             title: post.title,

@@ -5,14 +5,23 @@ import {
 } from 'react';
 import { mdxToReact } from '~/services/doc-convert.server';
 import type { Route } from './+types/blog-post';
-import type { Post } from 'ms0503-dev-db';
+import type {
+    Post, PostBody
+} from 'ms0503-dev-db';
 
 function Body({ body: _body }: Pick<Route.ComponentProps['loaderData'], 'body'>) {
-    return use(_body);
+    const body = use(_body);
+    if(!body) {
+        return '-';
+    }
+    return body;
 }
 
 function Title({ post: _post }: Pick<Route.ComponentProps['loaderData'], 'post'>) {
     const post = use(_post);
+    if(!post) {
+        return '指定の記事は見つかりませんでした。';
+    }
     return post.title;
 }
 
@@ -34,12 +43,15 @@ export default function BlogPost({ loaderData: {
 }
 
 export async function loader({
-    context: { fetchFromDB }, params: { postId }
+    context: { db }, params: { postId }
 }: Route.LoaderArgs) {
-    const post = fetchFromDB(`/v1/post/${postId}`).then(res => res.json<Post>());
-    const body = fetchFromDB(`/v1/post/${postId}/body`)
-        .then(res => res.text())
-        .then(raw => mdxToReact(raw));
+    const post = db.prepare('select * from posts where id = ?').bind(postId).first<Post>();
+    const body = db.prepare(
+        'select post_bodies.* from post_bodies inner join posts on post_bodies.id = posts.body_id where posts.id = ?')
+        .bind(postId)
+        .first<PostBody>()
+        .then(res => res === null ? null : res.body)
+        .then(raw => raw === null ? null : mdxToReact(raw));
     return {
         body,
         post

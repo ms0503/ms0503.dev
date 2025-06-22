@@ -7,7 +7,7 @@ type Cloudflare = Omit<PlatformProxy<Env>, 'dispose'>;
 declare module 'react-router' {
     interface AppLoadContext {
         cloudflare: Cloudflare;
-        fetchFromDB: (input: string, init?: RequestInit) => Promise<Response>;
+        db: D1Database;
     }
 }
 

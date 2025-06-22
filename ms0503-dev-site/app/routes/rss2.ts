@@ -1,32 +1,34 @@
 'use strict';
 
 import dayjs from 'dayjs';
-import {
-    BLOG_POSTS_ROOT, FEED_MAX_ITEMS
-} from '~/lib/constants';
+import type { Category, Post } from 'ms0503-dev-db';
+import { BLOG_POSTS_ROOT, FEED_MAX_ITEMS } from '~/lib/constants';
 import { generateRss2 } from '~/lib/feed';
-import type { Route } from './+types/rss2';
-import type { Post } from 'ms0503-dev-db';
 import type { Item } from '~/lib/feed/rss2';
+import type { Route } from './+types/rss2';
 
-export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
-    const posts = await fetchFromDB(`/v1/post?count=${FEED_MAX_ITEMS}`).then(res => res.json<Post[]>());
+export async function loader({context: {db}}: Route.LoaderArgs) {
+    const posts = (
+        await db.prepare('select * from posts limit ?').bind(FEED_MAX_ITEMS).all<Post>()
+    ).results;
     const categories = await (
         async () => {
-            const categories: Promise<[ string, string ]>[] = [];
+            const categories: Promise<[ string, Category ]>[] = [];
             for(const post of posts) {
                 categories.push(
-                    fetchFromDB(`/v1/category/${post.categoryId}/name`)
-                        .then(res => res.text())
-                        .then<[ string, string ]>(name => [
+                    db.prepare('select * from categories where id = ?')
+                    .bind(post.categoryId)
+                    .first<Category>()
+                    .then(cat => cat!)
+                    .then<[ string, Category ]>(cat => [
                             post.id,
-                            name
+                        cat
                         ])
                 );
             }
             return Promise
                 .all(categories)
-                .then<{ [id: string]: string }>(categories => categories.reduce(
+            .then<{ [id: string]: Category }>(categories => categories.reduce(
                     (acc, curr) => (
                         {
                             ...acc,
@@ -39,7 +41,7 @@ export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
     )();
     const items = posts.map<Item>(post => (
         {
-            category: categories[post.id]!,
+            category: categories[post.id]!.name,
             description: post.description ?? undefined,
             link: `${BLOG_POSTS_ROOT}/${post.id}`,
             pubDate: dayjs(post.createdAt).toString(),

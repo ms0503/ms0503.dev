@@ -11,18 +11,22 @@ import type {
 } from 'ms0503-dev-db';
 import type { Entry } from '~/lib/feed/atom';
 
-export async function loader({ context: { fetchFromDB } }: Route.LoaderArgs) {
-    const posts = await fetchFromDB(`/v1/post?count=${FEED_MAX_ITEMS}`).then(res => res.json<Post[]>());
+export async function loader({ context: { db } }: Route.LoaderArgs) {
+    const posts = (
+        await db.prepare('select * from posts limit ?').bind(FEED_MAX_ITEMS).all<Post>()
+    ).results;
     const categories = await (
         async () => {
             const categories: Promise<[ string, Category ]>[] = [];
             for(const post of posts) {
                 categories.push(
-                    fetchFromDB(`/v1/category/${post.categoryId}`)
-                        .then(res => res.json<Category>())
-                        .then<[ string, Category ]>(category => [
+                    db.prepare('select * from categories where id = ?')
+                        .bind(post.categoryId)
+                        .first<Category>()
+                        .then(cat => cat!)
+                        .then<[ string, Category ]>(cat => [
                             post.id,
-                            category
+                            cat
                         ])
                 );
             }

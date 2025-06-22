@@ -1,9 +1,5 @@
 {
   inputs = {
-    fenix = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/fenix";
-    };
     flake-parts = {
       inputs.nixpkgs-lib.follows = "nixpkgs";
       url = "github:hercules-ci/flake-parts";
@@ -33,24 +29,11 @@
         ./git-hooks.nix
       ];
       perSystem =
-        {
-          config,
-          inputs',
-          lib,
-          pkgs,
-          ...
-        }:
+        { config, pkgs, ... }:
         {
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
-              (
-                with inputs'.fenix.packages;
-                combine [
-                  targets.wasm32-unknown-unknown.latest.rust-std
-                ]
-              )
               nodejs-slim
-              worker-build
               yarn-berry
             ];
             shellHook = ''

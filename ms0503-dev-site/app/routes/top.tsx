@@ -9,7 +9,7 @@ export const meta: Route.MetaFunction = () => {
             name: 'description'
         },
         {
-            title: 'ms0503.dev'
+            title: '波打ち際のガラクタ小屋'
         }
     ];
 };
@@ -17,7 +17,8 @@ export const meta: Route.MetaFunction = () => {
 export default function Top() {
     return (
         <>
-            <h1>ms0503.dev</h1>
+            <h1>ms0503.dev ― 波打ち際のガラクタ小屋</h1>
+            <p>ここは渡波 空が作った色んな物と技術記事を置いておく場所。ただいま絶賛工事中。</p>
             <p>Λ-----[工事中]-----Λ</p>
         </>
     );
