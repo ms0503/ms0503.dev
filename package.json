@@ -25,7 +25,6 @@
     },
     "workspaces": [
         "ms0503-dev-db",
-        "ms0503-dev-editor",
         "ms0503-dev-eslint",
         "ms0503-dev-site"
     ]

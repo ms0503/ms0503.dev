@@ -285,7 +285,6 @@ export const rules: ESLintConfigParts = _ => [
                 'error',
                 'prefer-top-level'
             ],
-            'import-x/exports-last': 'error',
             'import-x/first': 'error',
             'import-x/newline-after-import': [
                 'error',
