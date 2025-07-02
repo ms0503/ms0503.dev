@@ -4,13 +4,11 @@
         "allowSyntheticDefaultImports": true,
         "checkJs": true,
         "composite": true,
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
         "target": "ESNext"
     },
+    "extends": "./tsconfig.json",
     "include": [
         "eslint.config.ts",
-        "load-context.ts",
         "react-router.config.ts",
         "stylelint.config.mjs",
         "vite.config.ts",

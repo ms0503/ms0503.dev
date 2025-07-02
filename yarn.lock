@@ -7464,6 +7464,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ms0503-dev-site@workspace:ms0503-dev-site"
   dependencies:
+    "@cloudflare/vite-plugin": "npm:^1"
     "@cloudflare/workers-types": "npm:^4"
     "@eslint/compat": "npm:^1"
     "@eslint/eslintrc": "npm:^3"

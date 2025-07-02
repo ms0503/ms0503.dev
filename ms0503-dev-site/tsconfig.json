@@ -2,16 +2,9 @@
     "compilerOptions": {
         "allowJs": false,
         "allowSyntheticDefaultImports": true,
-        "baseUrl": ".",
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "isolatedModules": true,
-        "jsx": "react-jsx",
-        "lib": [
-            "DOM",
-            "DOM.Iterable",
-            "ESNext"
-        ],
         "module": "ESNext",
         "moduleResolution": "Bundler",
         "noEmit": true,
@@ -23,16 +16,7 @@
         "noUncheckedIndexedAccess": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "paths": {
-            "~/*": [
-                "./app/*"
-            ]
-        },
         "resolveJsonModule": true,
-        "rootDirs": [
-            ".",
-            "./.react-router/types"
-        ],
         "skipLibCheck": true,
         "strict": true,
         "strictBindCallApply": true,
@@ -40,24 +24,12 @@
         "strictFunctionTypes": true,
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
-        "target": "ES2022",
-        "types": [
-            "@react-router/cloudflare",
-            "node",
-            "react",
-            "react-dom",
-            "vite/client"
-        ],
         "useDefineForClassFields": true
     },
-    "include": [
-        ".react-router/types/**/*",
-        "app/**/*.ts",
-        "app/**/*.tsx",
-        "functions/**/*.ts",
-        "worker-configuration.d.ts"
-    ],
     "references": [
+        {
+            "path": "./tsconfig.cloudflare.json"
+        },
         {
             "path": "./tsconfig.node.json"
         }
