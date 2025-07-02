@@ -4,12 +4,13 @@ import styles from './header.module.css';
 import { NavLink } from 'react-router';
 import type { PropsWithClassName } from '~/lib/types';
 
-const navLinks: [string, string][] = [
-    [
-        '/',
-        'Top'
-    ]
-];
+const navLinks = {
+    '/': 'Top',
+    '/blog': 'Blog',
+    'https://github.com/ms0503': 'GitHub',
+    // eslint-disable-next-line perfectionist/sort-objects
+    '/social': 'Social'
+};
 
 export default function Navigation({ className }: PropsWithClassName) {
     return (
@@ -19,18 +20,36 @@ export default function Navigation({ className }: PropsWithClassName) {
                 ${className ?? ''}
             `}
         >
-            {navLinks.map((navLink, i) => (
+            {Object.keys(navLinks).map(path => path.startsWith('http') ? (
+                <a
+                    className="
+                        duration-100 grow px-4 py-2 text-center text-inherit text-xl transition-colors
+                        hover:no-underline
+                        bg-bg1
+                        hover:bg-bg
+                        dark:bg-bg1-dark
+                        dark:hover:bg-bg-dark
+                    "
+                    href={path}
+                    key={path}
+                >
+                    {navLinks[path as keyof typeof navLinks]}
+                </a>
+            ) : (
                 <NavLink
                     className={({ isActive }) => `
                         duration-100 grow px-4 py-2 text-center text-inherit text-xl transition-colors
-                        hover:bg-neutral-400
-                        dark:hover:bg-neutral-700
+                        hover:no-underline
+                        bg-bg1
+                        hover:bg-bg
+                        dark:bg-bg1-dark
+                        dark:hover:bg-bg-dark
                         ${isActive ? styles['active'] : ''}
                     `}
-                    key={i}
-                    to={navLink[0]}
+                    key={path}
+                    to={path}
                 >
-                    {navLink[1]}
+                    {navLinks[path as keyof typeof navLinks]}
                 </NavLink>
             ))}
         </nav>

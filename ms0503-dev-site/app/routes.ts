@@ -8,6 +8,7 @@ export default [
     route('atom.xml', './routes/atom.ts'),
     route('feed.json', './routes/json-feed.ts'),
     route('rss2.xml', './routes/rss2.ts'),
+    route('social', './routes/social.tsx'),
     ...prefix('blog', [
         index('./routes/blog-top.tsx'),
         route('posts/:postId', './routes/blog-post.tsx')

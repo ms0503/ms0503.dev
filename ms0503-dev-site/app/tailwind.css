@@ -4,15 +4,24 @@
 @import 'tailwindcss';
 
 @theme {
-    --font-mono: 'Noto Sans Mono CJK JP', 'Noto Sans Mono', 'Source Code Pro', 'Source Han Code JP', ui-monospace, monospace, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    --font-sans: 'Noto Sans JP', 'Noto Sans CJK JP', 'Helvetica Neue', helvetica, arial, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', meiryo, ui-sans-serif, system-ui, sans-serif, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    --color-bg: var(--color-neutral-100);
+    --color-bg-dark: var(--color-neutral-800);
+    --color-bg1: var(--color-neutral-300);
+    --color-bg1-dark: var(--color-neutral-600);
+    --color-bg2: var(--color-neutral-400);
+    --color-bg2-dark: var(--color-neutral-500);
+    --color-link: var(--color-blue-500);
+    --color-text: var(--color-neutral-800);
+    --color-text-dark: var(--color-neutral-200);
+    --font-mono: "Noto Sans Mono CJK JP", "Noto Sans Mono", "Source Code Pro", "Source Han Code JP", ui-monospace, monospace, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-sans: "Noto Sans JP", "Noto Sans CJK JP", "Helvetica Neue", helvetica, arial, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", meiryo, ui-sans-serif, system-ui, sans-serif, "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 @layer base {
     html, body {
         @apply font-sans;
-        @apply bg-neutral-100 text-neutral-800;
-        @apply dark:bg-neutral-800 dark:text-neutral-200;
+        @apply bg-bg text-text;
+        @apply dark:bg-bg-dark dark:text-text-dark;
 
         @media (prefers-color-scheme: dark) {
             color-scheme: dark;
@@ -25,7 +34,8 @@
 
     a {
         @apply no-underline;
-        @apply text-blue-500;
+        @apply hover:underline;
+        @apply text-link;
     }
 
     p {
@@ -33,12 +43,16 @@
     }
 
     h1 {
-        @apply font-bold mb-4 text-4xl;
+        @apply font-bold mb-4 text-5xl;
+    }
+
+    h2 {
+        @apply font-bold mb-3 text-4xl;
     }
 
     input {
         @apply border-2 px-2 py-1 rounded-md;
-        @apply border-neutral-800;
-        @apply dark:border-neutral-200;
+        @apply border-text;
+        @apply dark:border-text-dark;
     }
 }

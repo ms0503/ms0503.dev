@@ -17,14 +17,14 @@ export async function loader({ context: { db } }: Route.LoaderArgs) {
     ).results;
     const categories = await (
         async () => {
-            const categories: Promise<[ string, Category ]>[] = [];
+            const categories: Promise<[ Post['id'], Category ]>[] = [];
             for(const post of posts) {
                 categories.push(
                     db.prepare('select * from categories where id = ?')
                         .bind(post.categoryId)
                         .first<Category>()
                         .then(cat => cat!)
-                        .then<[ string, Category ]>(cat => [
+                        .then<[ Post['id'], Category ]>(cat => [
                             post.id,
                             cat
                         ])
@@ -32,7 +32,7 @@ export async function loader({ context: { db } }: Route.LoaderArgs) {
             }
             return Promise
                 .all(categories)
-                .then<{ [id: string]: Category }>(categories => categories.reduce(
+                .then<{ [id: Post['id']]: Category }>(categories => categories.reduce(
                     (acc, curr) => (
                         {
                             ...acc,
@@ -45,14 +45,14 @@ export async function loader({ context: { db } }: Route.LoaderArgs) {
     )();
     const tags = await (
         async () => {
-            const tags: Promise<[ string, string[] ]>[] = [];
+            const tags: Promise<[ Post['id'], string[] ]>[] = [];
             for(const post of posts) {
                 tags.push(
                     db.prepare(
                         'select tags.* from tags inner join posts_and_tags on tags.id = posts_and_tags.tag_id where posts_and_tags.post_id = ?')
                         .bind(post.id)
                         .all<Tag>()
-                        .then<[ string, string[] ]>(result => [
+                        .then<[ Post['id'], string[] ]>(result => [
                             post.id,
                             result.results.map(tag => tag.name)
                         ])
@@ -60,7 +60,7 @@ export async function loader({ context: { db } }: Route.LoaderArgs) {
             }
             return Promise
                 .all(tags)
-                .then<{ [id: string]: string[] }>(tags => tags.reduce(
+                .then<{ [id: Post['id']]: string[] }>(tags => tags.reduce(
                     (acc, curr) => (
                         {
                             ...acc,
@@ -75,7 +75,7 @@ export async function loader({ context: { db } }: Route.LoaderArgs) {
         {
             date_modified: dayjs(post.updatedAt).toISOString(),
             date_published: dayjs(post.createdAt).toISOString(),
-            id: post.id,
+            id: post.id.toString(10),
             tags: [
                 categories[post.id]!.name,
                 ...tags[post.id]!

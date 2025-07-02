@@ -1,0 +1,27 @@
+--- a/public/fonts/NotoSansMonoCJKjp-Bold.css
++++ b/public/fonts/NotoSansMonoCJKjp-Bold.css
+@@ -1,5 +1,5 @@
+ @font-face {
+-    font-family: "NotoSansMonoCJKjp-Bold";
++    font-family: "Noto Sans Mono CJK JP";
+     src: url("NotoSansMonoCJKjp-Bold.eot"); /* IE9 */
+     src: url("NotoSansMonoCJKjp-Bold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+     url("NotoSansMonoCJKjp-Bold.woff2") format("woff2"), /* chrome 36+, firefox 39+,iOS 10+, Android 67+ */
+@@ -7,7 +7,7 @@
+     url("NotoSansMonoCJKjp-Bold.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+     url("NotoSansMonoCJKjp-Bold.svg#NotoSansMonoCJKjp-Bold") format("svg"); /* iOS 4.1- */
+     font-style: normal;
+-    font-weight: normal;
++    font-weight: bold;
+ }
+ 
+ 
+--- a/public/fonts/NotoSansMonoCJKjp-Regular.css
++++ b/public/fonts/NotoSansMonoCJKjp-Regular.css
+@@ -1,5 +1,5 @@
+ @font-face {
+-    font-family: "NotoSansMonoCJKjp-Regular";
++    font-family: "Noto Sans Mono CJK JP";
+     src: url("NotoSansMonoCJKjp-Regular.eot"); /* IE9 */
+     src: url("NotoSansMonoCJKjp-Regular.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+     url("NotoSansMonoCJKjp-Regular.woff2") format("woff2"), /* chrome 36+, firefox 39+,iOS 10+, Android 67+ */

@@ -76,6 +76,7 @@
             enable = true;
             indent_size = 4;
           };
+          taplo.enable = true;
         };
         settings.formatter = {
           jsonfmt = {

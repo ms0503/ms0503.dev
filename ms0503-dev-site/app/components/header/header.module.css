@@ -3,6 +3,6 @@
 @reference "../../tailwind.css";
 
 .active {
-    @apply bg-neutral-400;
-    @apply dark:bg-neutral-700;
+    @apply bg-bg;
+    @apply dark:bg-bg-dark;
 }

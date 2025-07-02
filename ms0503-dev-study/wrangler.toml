@@ -1,0 +1,22 @@
+"$schema" = "../node_modules/wrangler/config-schema.json"
+compatibility_date = "2025-04-02"
+compatibility_flags = ["nodejs_compat"]
+main = "./workers/app.ts"
+name = "study-ms0503-dev"
+
+[assets]
+directory = "./build/client"
+not_found_handling = "404-page"
+run_worker_first = false
+
+[[d1_databases]]
+binding = "db"
+database_id = "4591e282-92ed-4404-aa80-ba091b2e8eab"
+database_name = "ms0503-dev"
+migrations_dir = "../ms0503-dev-site/migrations"
+
+[observability]
+enabled = true
+
+[placement]
+mode = "smart"

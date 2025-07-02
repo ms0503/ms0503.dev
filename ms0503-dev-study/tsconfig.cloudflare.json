@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "composite": true,
+        "jsx": "react-jsx",
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
+        "paths": {
+            "~/*": [
+                "./app/*"
+            ]
+        },
+        "rootDirs": [
+            ".",
+            "./.react-router/types"
+        ],
+        "target": "ES2022",
+        "types": [
+            "node",
+            "react",
+            "react-dom",
+            "vite/client"
+        ]
+    },
+    "extends": "./tsconfig.json",
+    "include": [
+        ".react-router/types/**/*",
+        "app/**/*.ts",
+        "app/**/*.tsx",
+        "functions/**/*.ts",
+        "worker-configuration.d.ts",
+        "workers/*.ts"
+    ]
+}

@@ -1,0 +1,7 @@
+@font-face {
+    font-family: "Noto Sans Mono CJK JP";
+    font-style: normal;
+    font-weight: normal;
+    src: url("NotoSansMonoCJKjp-Regular.eot"); /* IE9 */
+    src: url("NotoSansMonoCJKjp-Regular.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("NotoSansMonoCJKjp-Regular.woff2") format("woff2"), /* chrome 36+, firefox 39+,iOS 10+, Android 67+ */ url("NotoSansMonoCJKjp-Regular.woff") format("woff"), /* chrome, firefox */ url("NotoSansMonoCJKjp-Regular.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */ url("NotoSansMonoCJKjp-Regular.svg#NotoSansMonoCJKjp-Regular") format("svg"); /* iOS 4.1- */
+}

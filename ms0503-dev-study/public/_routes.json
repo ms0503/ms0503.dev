@@ -1,0 +1,12 @@
+{
+    "exclude": [
+        "/apple-touch-icon.png",
+        "/favicon.ico",
+        "/fonts/*",
+        "/icon-*"
+    ],
+    "include": [
+        "/*"
+    ],
+    "version": 1
+}

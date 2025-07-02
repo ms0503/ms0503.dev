@@ -17,14 +17,14 @@ export async function loader({ context: { db } }: Route.LoaderArgs) {
     ).results;
     const categories = await (
         async () => {
-            const categories: Promise<[ string, Category ]>[] = [];
+            const categories: Promise<[ Post['id'], Category ]>[] = [];
             for(const post of posts) {
                 categories.push(
                     db.prepare('select * from categories where id = ?')
                         .bind(post.categoryId)
                         .first<Category>()
                         .then(cat => cat!)
-                        .then<[ string, Category ]>(cat => [
+                        .then<[ Post['id'], Category ]>(cat => [
                             post.id,
                             cat
                         ])
@@ -32,7 +32,7 @@ export async function loader({ context: { db } }: Route.LoaderArgs) {
             }
             return Promise
                 .all(categories)
-                .then<{ [id: string]: Category }>(categories => categories.reduce(
+                .then<{ [id: Post['id']]: Category }>(categories => categories.reduce(
                     (acc, curr) => (
                         {
                             ...acc,
@@ -47,7 +47,7 @@ export async function loader({ context: { db } }: Route.LoaderArgs) {
         {
             category: {
                 '@_label': categories[post.id]!.name,
-                '@_term': categories[post.id]!.id
+                '@_term': categories[post.id]!.id.toString(10)
             },
             id: `tag:ms0503.dev,${dayjs(post.updatedAt).format('YYYY-MM-DD')}:/blog/posts/${post.id}`,
             link: {

@@ -1,30 +1,26 @@
 'use strict';
 
 export type Category = {
-    id: string,
+    id: number,
     name: string
 };
 
 export type Post = {
+    body: string,
     categoryId: Category['id'],
-    createdAt: string,
-    description?: null | string,
-    id: string,
+    createdAt: `${number}-${number}-${number}`,
+    description: string,
+    id: number,
     title: string,
-    updatedAt: string
+    updatedAt: `${number}-${number}-${number}`
 };
 
-export type PostAndTag = {
+export type PostTag = {
     postId: Post['id'],
     tagId: Tag['id']
 };
 
-export type PostBody = {
-    body: string,
-    id: string
-};
-
 export type Tag = {
-    id: string,
+    id: number,
     name: string
 };

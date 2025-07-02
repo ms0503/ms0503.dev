@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+    <metadata></metadata>
+    <defs>
+        <font id="FontForge 2.0 : NotoSansMonoCJKjp-Bold-Alphabetic : 1-1-1980" horiz-adv-x="364">
+            <font-face font-family="" font-weight="700" font-stretch="normal" units-per-em="1000"
+                       panose-1="2 0 8 3 0 0 0 0 0 0" ascent="827" descent="-244" x-height="0" bbox="33 0 298 666"
+                       underline-thickness="50" underline-position="-75" unicode-range="U+ffff-ffff" />
+            <missing-glyph horiz-adv-x="364"
+                           d="M33 0 l0 666 l265 0 l0 -666 l-265 0 ZM66 33 l199 0 l0 600 l-199 0 l0 -600 Z" />
+        </font>
+    </defs>
+</svg>

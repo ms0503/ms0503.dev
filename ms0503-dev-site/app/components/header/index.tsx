@@ -21,8 +21,8 @@ export default function Header({ className }: PropsWithClassName) {
         <header
             className={`
                 flex flex-col
-                bg-neutral-300
-                dark:bg-neutral-600
+                bg-bg1
+                dark:bg-bg1-dark
                 ${className ?? ''}
             `}
         >

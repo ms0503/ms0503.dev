@@ -12,13 +12,14 @@
           hooks = {
             actionlint.enable = true;
             check-json.enable = true;
+            check-toml.enable = true;
             editorconfig-checker = {
               enable = true;
               excludes = [
+                ".*/noto-sans-mono-cjk-jp-include.txt"
                 ".*/worker-configuration.d.ts"
                 ".idea"
                 "flake.lock"
-                "ms0503-dev-site/noto-sans-mono-cjk-jp-include.txt"
                 "yarn.lock"
               ];
             };
