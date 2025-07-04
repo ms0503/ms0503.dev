@@ -1,21 +1,12 @@
 {
-    "dependencies": {
-        "drizzle-orm": "^0.42"
-    },
     "devDependencies": {
         "@eslint/compat": "^1",
         "@eslint/eslintrc": "^3",
         "@types/node": "^22",
-        "dotenv": "^16",
-        "drizzle-kit": "^0.31",
         "eslint": "^9",
         "jiti": "^2",
         "ms0503-dev-eslint": "workspace:*",
-        "npm-run-all": "^4",
-        "rimraf": "^6",
-        "ts-add-js-extension": "^1",
-        "typescript": "^5",
-        "wrangler": "^4"
+        "typescript": "^5"
     },
     "engines": {
         "node": ">=21.0.0",
