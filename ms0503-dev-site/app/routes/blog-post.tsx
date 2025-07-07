@@ -41,7 +41,8 @@ function Title({ post: _post }: Pick<Route.ComponentProps['loaderData'], 'post'>
 }
 
 export async function loader({
-    context: { db }, params: { postId }
+    context: { cloudflare: { env: { db } } },
+    params: { postId }
 }: Route.LoaderArgs) {
     const post = db.prepare('select * from posts where id = ?')
         .bind(postId)

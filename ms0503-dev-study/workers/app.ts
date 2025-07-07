@@ -12,7 +12,8 @@ export default {
                 ctx,
                 env
             },
-            db: env.db
+            db: env.db,
+            obj: env.obj
         });
     }
 } satisfies ExportedHandler<Env>;

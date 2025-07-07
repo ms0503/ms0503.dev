@@ -11,7 +11,7 @@ import type {
 } from 'ms0503-dev-db';
 import type { Item } from '~/lib/feed/rss2';
 
-export async function loader({ context: { db } }: Route.LoaderArgs) {
+export async function loader({ context: { cloudflare: { env: { db } } } }: Route.LoaderArgs) {
     const posts = (
         await db.prepare('select * from posts limit ?').bind(FEED_MAX_ITEMS).all<Post>()
     ).results;

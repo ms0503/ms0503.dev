@@ -39,7 +39,7 @@ export default function BlogTop({ loaderData: { recentPosts: _recentPosts } }: R
     );
 }
 
-export async function loader({ context: { db } }: Route.LoaderArgs) {
+export async function loader({ context: { cloudflare: { env: { db } } } }: Route.LoaderArgs) {
     const recentPosts = db.prepare('select description, id, title from posts order by updated_at desc limit ?')
         .bind(MAX_RECENT_POSTS)
         .all<Pick<Post, 'description' | 'id' | 'title'>>()

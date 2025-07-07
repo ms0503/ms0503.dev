@@ -1,5 +1,5 @@
 "$schema" = "../node_modules/wrangler/config-schema.json"
-compatibility_date = "2025-04-02"
+compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
 main = "./workers/app.ts"
 name = "ms0503-dev"
@@ -15,8 +15,15 @@ database_id = "4591e282-92ed-4404-aa80-ba091b2e8eab"
 database_name = "ms0503-dev"
 migrations_dir = "migrations"
 
+[images]
+binding = "img"
+
 [observability]
 enabled = true
 
 [placement]
 mode = "smart"
+
+[[r2_buckets]]
+binding = "obj"
+bucket_name = "objects"

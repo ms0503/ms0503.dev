@@ -1,9 +1,6 @@
 {
     "dependencies": {
-        "@cloudflare/workers-types": "^4",
-        "@react-router/cloudflare": "^7",
         "dayjs": "^1",
-        "dotenv": "^16",
         "fast-xml-parser": "^5",
         "isbot": "^5",
         "ms0503-dev-db": "workspace:*",
@@ -57,7 +54,7 @@
         "yarn": ">=4.0.0"
     },
     "name": "ms0503-dev-site",
-    "packageManager": "yarn@4.9.1",
+    "packageManager": "yarn@4.9.2",
     "private": true,
     "scripts": {
         "build": "react-router build",

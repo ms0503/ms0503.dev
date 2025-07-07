@@ -15,13 +15,12 @@ export const configs: ESLintConfigParts = compat => [
             ...tsConfigs.recommended
         ]
     },
-    // eslint-disable-next-line import-x/no-named-as-default-member
     stylistic.configs.recommended,
     importXConfigs.recommended,
     importXConfigs.typescript,
     importXConfigs.react,
-    react.configs.flat.recommended,
-    react.configs.flat['jsx-runtime'],
+    react.configs.flat.recommended!,
+    react.configs.flat['jsx-runtime']!,
     ...compat.extends('plugin:react-hooks/recommended'),
     jsxA11y.flatConfigs.strict
 ];

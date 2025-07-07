@@ -6,7 +6,8 @@
         "eslint": "^9",
         "jiti": "^2",
         "ms0503-dev-eslint": "workspace:*",
-        "typescript": "^5"
+        "typescript": "^5",
+        "wrangler": "^4"
     },
     "engines": {
         "node": ">=21.0.0",
@@ -20,11 +21,11 @@
         }
     },
     "name": "ms0503-dev-db",
-    "packageManager": "yarn@4.9.1",
+    "packageManager": "yarn@4.9.2",
+    "private": true,
     "scripts": {
         "build": ":",
         "clean": ":",
-        "dev": ":",
         "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint/ .",
         "lint:fix": "eslint --cache --cache-location ./node_modules/.cache/eslint/ --fix .",
         "typecheck": "tsc",

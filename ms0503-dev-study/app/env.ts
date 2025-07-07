@@ -6,8 +6,7 @@ type Cloudflare = Omit<PlatformProxy<Env>, 'dispose'>;
 
 declare module 'react-router' {
     interface AppLoadContext {
-        cloudflare: Pick<Cloudflare, 'ctx' | 'env'>;
-        db: D1Database;
+        cloudflare: Cloudflare;
     }
 }
 

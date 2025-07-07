@@ -1,5 +1,5 @@
 "$schema" = "../node_modules/wrangler/config-schema.json"
-compatibility_date = "2025-04-02"
+compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
 main = "./workers/app.ts"
 name = "study-ms0503-dev"
@@ -20,3 +20,7 @@ enabled = true
 
 [placement]
 mode = "smart"
+
+[[r2_buckets]]
+binding = "obj"
+bucket_name = "objects"
