@@ -165,7 +165,7 @@ function MetadataEditor({
 }
 
 export async function loader({
-    context: { db },
+    context: { cloudflare: { env: { db } } },
     params: { id },
     request
 }: Route.LoaderArgs) {
@@ -200,7 +200,7 @@ export async function loader({
 }
 
 export async function action({
-    context: { db },
+    context: { cloudflare: { env: { db } } },
     params: { id },
     request
 }: Route.ActionArgs) {

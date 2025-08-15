@@ -95,7 +95,8 @@ export default function NewPosts({ loaderData: {
 }
 
 export async function loader({
-    context: { db }, request
+    context: { cloudflare: { env: { db } } },
+    request
 }: Route.LoaderArgs) {
     const session = await sessionStorage.getSession(request.headers.get('cookie'));
     const user = session.get('user');
@@ -111,7 +112,8 @@ export async function loader({
 }
 
 export async function action({
-    context: { db }, request
+    context: { cloudflare: { env: { db } } },
+    request
 }: Route.ActionArgs) {
     const session = await sessionStorage.getSession(request.headers.get('cookie'));
     const user = session.get('user');

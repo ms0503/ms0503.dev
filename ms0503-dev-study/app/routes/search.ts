@@ -2,39 +2,53 @@
 
 import type { Route } from './+types/search';
 import type {
-    Category, Post, Tag
+    Category, Tag
 } from 'ms0503-dev-db';
 
 const MAX_ITEMS = 100;
 
 export async function loader({
-    context: { db },
-    request: { url }
+    context: { cloudflare: { env: {
+        db,
+        obj
+    } } },
+    request
 }: Route.LoaderArgs) {
-    const params = new URL(url).searchParams;
+    const session = await sessionStorage.getSession(request.headers.get('cookie'));
+    const user = session.get('user');
+    if(!user) {
+        throw data(null, 401);
+    }
+    const params = new URL(request.url).searchParams;
     const query = params.get('q');
     const target = params.get('t') ?? 'posts';
-    console.log('target:', target, 'query:', query);
     if(!query) {
-        return [];
+        return Response.json([]);
     }
     switch(target) {
         case 'categories':
-            return Response.json((
-                await db.prepare('select * from categories where name like ? limit ?')
-                    .bind(`${query}%`, MAX_ITEMS)
-                    .all<Category>()
-            ).results);
+            return db.prepare('select * from categories where name like ? limit ?')
+                .bind(`${query}%`, MAX_ITEMS)
+                .all<Category>()
+                .then(result => result.results)
+                .then(results => Response.json(results));
+        case 'images':
+            return obj.list({
+                limit: MAX_ITEMS,
+                prefix: query
+            }).then(objects => Response.json(objects.objects.map(object => object.key)));
         case 'posts':
-            return Response.json((
-                await db.prepare('select * from posts where title like ? limit ?')
-                    .bind(`${query}%`, MAX_ITEMS)
-                    .all<Post>()
-            ).results);
+            return db.prepare('select * from posts where title like ? limit ?')
+                .bind(`${query}%`, MAX_ITEMS)
+                .all<Category>()
+                .then(result => result.results)
+                .then(results => Response.json(results));
         case 'tags':
-            return Response.json((
-                await db.prepare('select * from tags where name like ? limit ?').bind(`${query}%`, MAX_ITEMS).all<Tag>()
-            ).results);
+            return db.prepare('select * from tags where name like ? limit ?')
+                .bind(`${query}%`, MAX_ITEMS)
+                .all<Tag>()
+                .then(result => result.results)
+                .then(results => Response.json(results));
         default:
             throw new Response('Invalid search target', {
                 status: 400
