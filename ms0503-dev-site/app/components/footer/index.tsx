@@ -2,6 +2,20 @@
 
 import type { PropsWithClassName } from '~/lib/types';
 
+type AccessCounterProps = {
+    count: number
+};
+
+function AccessCounter({ count }: AccessCounterProps) {
+    return (
+        <div className="text-right">
+            あなたは
+            {count}
+            人目の人間かもね
+        </div>
+    );
+}
+
 function Copyright({ className }: PropsWithClassName) {
     return (
         <div
@@ -15,7 +29,11 @@ function Copyright({ className }: PropsWithClassName) {
     );
 }
 
-export default function Footer({ className }: PropsWithClassName) {
+export type Props = PropsWithClassName<AccessCounterProps>;
+
+export default function Footer({
+    className, count
+}: Props) {
     return (
         <footer
             className={`
@@ -25,6 +43,7 @@ export default function Footer({ className }: PropsWithClassName) {
                 ${className ?? ''}
             `}
         >
+            <AccessCounter count={count} />
             <Copyright />
         </footer>
     );

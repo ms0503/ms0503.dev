@@ -18,6 +18,10 @@ migrations_dir = "migrations"
 [images]
 binding = "img"
 
+[[kv_namespaces]]
+binding = "kv"
+id = "e5c201a29fe64c18b071fcc91543d719"
+
 [observability]
 enabled = true
 

@@ -9,6 +9,7 @@ import Header from '~/components/header';
 import {
     ATOM_URL, JSON_FEED_URL, RSS2_URL
 } from '~/lib/constants';
+import { count } from '~/services/access-counter.server';
 import type { Route } from './+types/root';
 import type { PropsWithChildren } from 'react';
 
@@ -113,20 +114,34 @@ export function Layout({ children }: PropsWithChildren) {
                 <Links />
             </head>
             <body>
-                <Header className="shrink" />
-                <hr />
-                <main className="flex flex-col grow items-center justify-center mx-6 my-4">
-                    {children}
-                </main>
-                <hr />
-                <Footer className="shrink" />
-                <ScrollRestoration />
-                <Scripts />
+                {children}
             </body>
         </html>
     );
 }
 
-export default function App() {
-    return <Outlet />;
+export default function App({ loaderData: { count } }: Route.ComponentProps) {
+    return (
+        <>
+            <Header className="shrink" />
+            <hr />
+            <main className="flex flex-col grow items-center justify-center mx-6 my-4">
+                <Outlet />
+            </main>
+            <hr />
+            <Footer
+                className="shrink"
+                count={count}
+            />
+            <ScrollRestoration />
+            <Scripts />
+        </>
+    );
+}
+
+export async function loader({ context: { cloudflare: { env: { kv } } } }: Route.LoaderArgs) {
+    const nowCount = await count(kv);
+    return {
+        count: nowCount
+    };
 }
