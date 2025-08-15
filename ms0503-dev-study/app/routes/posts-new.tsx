@@ -138,9 +138,7 @@ export async function action({
     if(Object.values(errors).reduce((p, c) => p || c, false)) {
         return data({
             errors
-        }, {
-            status: 400
-        });
+        }, 400);
     }
     const post = await db.prepare('insert into posts (body, category_id, description, title) values (?, ?, ?, ?)')
         .bind('', category, description ?? '', title)

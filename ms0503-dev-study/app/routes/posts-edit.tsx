@@ -210,9 +210,7 @@ export async function action({
         throw redirect('/login');
     }
     if(!id) {
-        throw data(null, {
-            status: 404
-        });
+        throw data(null, 404);
     }
     const errors = {
         category: false,
@@ -244,9 +242,7 @@ export async function action({
             if(Object.values(errors).reduce((p, c) => p || c, false)) {
                 return data({
                     errors
-                }, {
-                    status: 400
-                });
+                }, 400);
             }
             const promises: Promise<unknown>[] = [];
             promises.push(
@@ -284,9 +280,7 @@ export async function action({
             errors.formType = true;
             return data({
                 errors
-            }, {
-                status: 400
-            });
+            }, 400);
     }
     return null;
 }

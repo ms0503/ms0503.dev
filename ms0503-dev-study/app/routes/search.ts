@@ -1,5 +1,6 @@
 'use strict';
 
+import { data } from 'react-router';
 import type { Route } from './+types/search';
 import type {
     Category, Tag
@@ -50,8 +51,6 @@ export async function loader({
                 .then(result => result.results)
                 .then(results => Response.json(results));
         default:
-            throw new Response('Invalid search target', {
-                status: 400
-            });
+            throw data('Invalid search target', 400);
     }
 }
