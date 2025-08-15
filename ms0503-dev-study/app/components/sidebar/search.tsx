@@ -9,23 +9,31 @@ import type { Post } from 'ms0503-dev-db';
 import type { ChangeEvent } from 'react';
 import type { PropsWithClassName } from '~/lib/types';
 
-export type SearchBoxProps = PropsWithClassName<object, HTMLDivElement>;
+type ImageResponse = string;
 
-export default function Search({ className }: SearchBoxProps) {
+export type SearchType = 'images' | 'posts';
+
+export type SearchBoxProps = PropsWithClassName<{
+    type: SearchType
+}, HTMLDivElement>;
+
+export default function Search({
+    className,
+    type
+}: SearchBoxProps) {
     const [queryInput, setQueryInput] = useState('');
     const [query] = useDebounce(queryInput, 500);
-    const [posts, setPosts] = useState<Post[]>([]);
+    const [results, setResults] = useState<(ImageResponse | Post)[]>([]);
 
     function handleQueryChange(event: ChangeEvent<HTMLInputElement>) {
         setQueryInput(event.target.value);
     }
 
     useEffect(() => {
-        (
-            async () => setPosts(await search(query))
-        )();
+        search(type, query).then(results => setResults(results));
     }, [
-        query
+        query,
+        type
     ]);
     return (
         <div
@@ -46,7 +54,7 @@ export default function Search({ className }: SearchBoxProps) {
                 value={queryInput}
             />
             <div className="flex flex-col gap-4 grow shrink">
-                {posts.map(post => (
+                {results.map((result, i) => (
                     <NavLink
                         className={({ isActive }) => `
                             block border overflow-ellipsis px-3 py-2 text-xl w-full
@@ -56,10 +64,10 @@ export default function Search({ className }: SearchBoxProps) {
                             dark:hover:bg-bg1-dark
                             ${isActive ? 'bg-bg1 dark:bg-bg1-dark' : ''}
                         `}
-                        key={post.id}
-                        to={`/posts/${post.id}/edit`}
+                        key={i}
+                        to={getItemLink(type, result)}
                     >
-                        {post.title}
+                        {getItemName(type, result)}
                     </NavLink>
                 ))}
             </div>
@@ -67,9 +75,31 @@ export default function Search({ className }: SearchBoxProps) {
     );
 }
 
-async function search(query: string): Promise<Post[]> {
+function getItemLink(type: SearchType, item: ImageResponse | Post) {
+    switch(type) {
+        case 'images':
+            return `/images/${item as ImageResponse}`;
+        case 'posts':
+            return `/posts/${(item as Post).id}/edit`;
+        default:
+            throw new Error('typeパラメータが正しくありません。');
+    }
+}
+
+function getItemName(type: SearchType, item: ImageResponse | Post) {
+    switch(type) {
+        case 'images':
+            return item as string;
+        case 'posts':
+            return (item as Post).title;
+        default:
+            throw new Error('typeパラメータが正しくありません。');
+    }
+}
+
+async function search(type: SearchType, query: string): Promise<(ImageResponse | Post)[]> {
     if(!query) {
         return [];
     }
-    return fetch(`/search?t=posts&q=${query}`).then(res => res.json());
+    return fetch(`/search?t=${type}&q=${query}`).then(res => res.json());
 }
