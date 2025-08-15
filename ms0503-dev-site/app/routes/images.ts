@@ -89,11 +89,11 @@ export async function loader({
         if(!img.customMetadata?.height || !img.customMetadata?.width) {
             throw data(null, 500);
         }
-        return {
+        return Response.json({
             height: parseInt(img.customMetadata.height, 10),
             type: img.httpMetadata.contentType,
             width: parseInt(img.customMetadata.width, 10)
-        };
+        });
     }
     const origImg = await obj.get(base);
     if(!origImg || !isFileTypeSupported(fileType)) {
