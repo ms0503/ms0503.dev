@@ -125,7 +125,7 @@ export default function App({ loaderData: { count } }: Route.ComponentProps) {
         <>
             <Header className="shrink" />
             <hr />
-            <main className="flex flex-col grow items-center justify-center mx-6 my-4">
+            <main className="flex flex-col grow items-center justify-center mx-32 my-24">
                 <Outlet />
             </main>
             <hr />
