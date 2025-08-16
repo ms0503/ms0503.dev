@@ -12,6 +12,7 @@ export default function Social() {
             <h1>ソーシャルリンク</h1>
             <h2>
                 <BsTwitter
+                    aria-hidden
                     className="inline mr-1"
                     color="#1d9bf0"
                 />
@@ -23,6 +24,7 @@ export default function Social() {
             </ul>
             <h2>
                 <SiMisskey
+                    aria-hidden
                     className="inline mr-1"
                     color="#a1ca03"
                 />
@@ -34,6 +36,7 @@ export default function Social() {
             </ul>
             <h2>
                 <SiDiscord
+                    aria-hidden
                     className="inline mr-1"
                     color="#5865f2"
                 />
@@ -46,6 +49,7 @@ export default function Social() {
             <h2>
                 <img
                     alt=""
+                    aria-hidden
                     className="inline h-[1em] mr-1 w-[1em]"
                     src={boothIcon}
                 />

@@ -93,7 +93,12 @@ export default function Top() {
             <h1>ms0503.dev ― 波打ち際のガラクタ小屋</h1>
             <p>ここは渡波 空が作った色んな物と技術記事を置いておく場所。ただいま絶賛工事中。</p>
             <p>
-                <span className="hidden">これぞ突貫工事</span>
+                <span
+                    aria-hidden
+                    className="hidden"
+                >
+                    これぞ突貫工事
+                </span>
                 <span className="text-red-500">Λ</span>
                 <span className="text-yellow-300">-</span>
                 <span className="text-black">-</span>
@@ -133,6 +138,7 @@ function aboutTextWithIcon(Icon: IconType, name: string, color?: `#${string}`) {
     return (
         <>
             <Icon
+                aria-hidden
                 className="inline mr-1"
                 {...(color ? {
                     style: {
