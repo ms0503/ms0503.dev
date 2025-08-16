@@ -39,14 +39,21 @@ export const meta: Route.MetaFunction = () => {
 
 /* eslint-disable @stylistic/quote-props, perfectionist/sort-objects */
 const aboutMe = {
-    '名前': (
-        <ruby>
-            渡波 空
-            <rp>(</rp>
-            <rt>となみ そら</rt>
-            <rp>)</rp>
-        </ruby>
-    ),
+    '名前': [
+        (
+            <>
+                <ruby>
+                    渡波 空
+                    <rp>(</rp>
+                    <rt>となみ そら</rt>
+                    <rp>)</rp>
+                </ruby>
+                (メイン名義)
+            </>
+        ),
+        'ms0503(メインハンドルネーム)',
+        'mihal1073(VRChat向け名義・ハンドルネーム)'
+    ],
     '趣味': [
         'Hoi4',
         'VRChat(ギミック制作・ワールド制作)',
@@ -114,22 +121,24 @@ export default function Top() {
                 <span className="text-red-500">Λ</span>
             </p>
             <h2>About me</h2>
-            <dl>
+            <div>
                 {Object.entries(aboutMe).map(([key, value], i) => (
                     <Fragment key={i}>
-                        <dt className="font-bold text-lg">{key}</dt>
-                        <dd className="ml-6">
-                            {Array.isArray(value) ? (
-                                <ul className="flex flex-row flex-wrap gap-8">
-                                    {value.map((v, i) => (
-                                        <li key={i}>{v}</li>
-                                    ))}
-                                </ul>
-                            ) : value}
-                        </dd>
+                        <h3>{key}</h3>
+                        {Array.isArray(value) ? (
+                            <ul className="flex flex-row flex-wrap gap-8 items-end mb-2">
+                                {value.map((v, i) => (
+                                    <li key={i}>
+                                        <p>{v}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>{value}</p>
+                        )}
                     </Fragment>
                 ))}
-            </dl>
+            </div>
         </>
     );
 }
