@@ -1,5 +1,3 @@
-'use strict';
-
 import { use } from 'react';
 import {
     data, redirect

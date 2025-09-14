@@ -1,5 +1,3 @@
-'use strict';
-
 import {
     data, redirect, useFetcher
 } from 'react-router';

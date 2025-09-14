@@ -1,5 +1,3 @@
-'use strict';
-
 import type { FlatCompat } from '@eslint/eslintrc';
 import type { InfiniteDepthConfigWithExtends } from 'typescript-eslint';
 

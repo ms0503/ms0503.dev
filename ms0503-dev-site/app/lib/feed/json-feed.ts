@@ -1,5 +1,3 @@
-'use strict';
-
 export interface Item {
     date_modified: string;
     date_published: string;

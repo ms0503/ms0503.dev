@@ -1,5 +1,3 @@
-'use strict';
-
 import js from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import { flatConfigs as importXConfigs } from 'eslint-plugin-import-x';

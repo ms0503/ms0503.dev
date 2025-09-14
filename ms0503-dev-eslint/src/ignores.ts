@@ -1,5 +1,3 @@
-'use strict';
-
 import type { ESLintConfigParts } from './types';
 
 export const ignores: ESLintConfigParts = _ => [

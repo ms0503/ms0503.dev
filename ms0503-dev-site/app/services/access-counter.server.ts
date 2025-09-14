@@ -1,5 +1,3 @@
-'use strict';
-
 export async function count(kv: KVNamespace) {
     const counter = await getCount(kv);
     if(!counter) {

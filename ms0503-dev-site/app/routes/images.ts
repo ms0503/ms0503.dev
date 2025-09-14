@@ -1,5 +1,3 @@
-'use strict';
-
 import { data } from 'react-router';
 import type { Route } from './+types/images';
 

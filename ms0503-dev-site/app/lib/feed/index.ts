@@ -1,5 +1,3 @@
-'use strict';
-
 import dayjs from 'dayjs';
 import { XMLBuilder } from 'fast-xml-parser';
 import {

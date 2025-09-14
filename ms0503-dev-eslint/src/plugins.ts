@@ -1,5 +1,3 @@
-'use strict';
-
 import perfectionist from 'eslint-plugin-perfectionist';
 import react from 'eslint-plugin-react';
 import type { ESLintConfigParts } from './types';

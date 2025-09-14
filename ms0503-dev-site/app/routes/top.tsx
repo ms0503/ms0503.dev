@@ -1,5 +1,3 @@
-'use strict';
-
 import { Fragment } from 'react';
 import { FaJava } from 'react-icons/fa6';
 import {

@@ -1,5 +1,3 @@
-'use strict';
-
 import styles from './header.module.css';
 import { NavLink } from 'react-router';
 import type { PropsWithClassName } from '~/lib/types';

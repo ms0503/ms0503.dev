@@ -1,5 +1,3 @@
-'use strict';
-
 import { redirect } from 'react-router';
 import { sessionStorage } from '~/services/auth.server';
 import type { Route } from './+types/top';

@@ -1,5 +1,3 @@
-'use strict';
-
 import { redirect } from 'react-router';
 import type { Route } from './+types/images-top';
 

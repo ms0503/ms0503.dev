@@ -1,5 +1,3 @@
-'use strict';
-
 import { imageSize } from 'image-size';
 
 export async function upload({ obj }: Env, name: string, file: File) {

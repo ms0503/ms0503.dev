@@ -1,5 +1,3 @@
-'use strict';
-
 import { createCookieSessionStorage } from 'react-router';
 import { Authenticator } from 'remix-auth';
 import { FormStrategy } from 'remix-auth-form';

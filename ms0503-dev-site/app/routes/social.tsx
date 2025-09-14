@@ -1,5 +1,3 @@
-'use strict';
-
 import { BsTwitter } from 'react-icons/bs';
 import {
     SiDiscord, SiMisskey

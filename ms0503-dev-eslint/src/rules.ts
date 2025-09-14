@@ -1,5 +1,3 @@
-'use strict';
-
 import type { ESLintConfigParts } from './types';
 
 const asciiPrintable = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';

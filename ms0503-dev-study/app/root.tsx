@@ -1,5 +1,3 @@
-'use strict';
-
 import './tailwind.css';
 import {
     Links, Meta, Outlet, Scripts, ScrollRestoration

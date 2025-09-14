@@ -1,5 +1,3 @@
-'use strict';
-
 // site info
 
 export const SITE_DESCRIPTION = 'Webとゲーム開発をかじってる技術オタクのサイト。';

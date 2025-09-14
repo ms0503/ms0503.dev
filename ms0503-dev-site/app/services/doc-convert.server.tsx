@@ -1,5 +1,3 @@
-'use strict';
-
 import { use } from 'react';
 import production from 'react/jsx-runtime';
 import { Link } from 'react-router';

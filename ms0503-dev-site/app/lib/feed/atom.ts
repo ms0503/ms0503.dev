@@ -1,5 +1,3 @@
-'use strict';
-
 export interface Category {
     '@_label': string;
     '@_term': string;

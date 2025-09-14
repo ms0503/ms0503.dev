@@ -1,5 +1,3 @@
-'use strict';
-
 import { use } from 'react';
 import { Link } from 'react-router';
 import type { Route } from './+types/blog-top';

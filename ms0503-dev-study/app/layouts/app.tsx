@@ -1,5 +1,3 @@
-'use strict';
-
 import Sidebar from '../components/sidebar';
 import { Outlet } from 'react-router';
 

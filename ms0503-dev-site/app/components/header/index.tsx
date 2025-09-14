@@ -1,5 +1,3 @@
-'use strict';
-
 import Navigation from './navigation';
 import type { PropsWithClassName } from '~/lib/types';
 

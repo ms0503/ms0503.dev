@@ -1,5 +1,3 @@
-'use strict';
-
 import {
     Suspense, use
 } from 'react';

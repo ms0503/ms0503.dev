@@ -1,5 +1,3 @@
-'use strict';
-
 import config from './src';
 import { includeIgnoreFile } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';

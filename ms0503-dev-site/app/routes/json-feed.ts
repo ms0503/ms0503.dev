@@ -1,5 +1,3 @@
-'use strict';
-
 import dayjs from 'dayjs';
 import {
     BLOG_POSTS_ROOT, FEED_MAX_ITEMS

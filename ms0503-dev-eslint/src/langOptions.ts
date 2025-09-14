@@ -1,5 +1,3 @@
-'use strict';
-
 import globals from 'globals';
 import type { ESLintConfigParts } from './types';
 

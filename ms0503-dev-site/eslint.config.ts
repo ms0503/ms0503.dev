@@ -1,5 +1,3 @@
-'use strict';
-
 import { includeIgnoreFile } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import config from 'ms0503-dev-eslint';

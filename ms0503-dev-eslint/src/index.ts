@@ -1,5 +1,3 @@
-'use strict';
-
 import { configs } from './configs';
 import { ignores } from './ignores';
 import { langOptions } from './langOptions';
