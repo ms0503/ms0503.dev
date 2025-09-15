@@ -1,3 +1,4 @@
+import { MdError } from 'react-icons/md';
 import {
     data, redirect, useFetcher
 } from 'react-router';
@@ -11,10 +12,64 @@ export default function NewPosts({ loaderData: {
     categories,
     tags
 } }: Route.ComponentProps) {
-    const fetcher = useFetcher();
+    const {
+        data, ...fetcher
+    } = useFetcher<Route.ComponentProps['actionData']>();
     return (
         <>
             <h1>記事を作成する</h1>
+            {data && hasError(data.errors) && (
+                <div className="flex flex-col my-4 w-full">
+                    {data.errors.alreadyExists && (
+                        <div
+                            className="
+                                border-2 flex flex-row gap-1 items-center px-3 py-2 rounded-lg
+                                bg-red-950 border-red-700
+                            "
+                        >
+                            <MdError
+                                className="
+                                    inline text-xl
+                                    text-red-500
+                                "
+                            />
+                            既に記事が存在しています。
+                        </div>
+                    )}
+                    {data.errors.category && (
+                        <div
+                            className="
+                                border-2 flex flex-row gap-1 items-center px-3 py-2 rounded-lg
+                                bg-red-950 border-red-700
+                            "
+                        >
+                            <MdError
+                                className="
+                                    inline text-xl
+                                    text-red-500
+                                "
+                            />
+                            カテゴリーを指定してください。
+                        </div>
+                    )}
+                    {data.errors.title && (
+                        <div
+                            className="
+                                border-2 flex flex-row gap-1 items-center px-3 py-2 rounded-lg
+                                bg-red-950 border-red-600
+                            "
+                        >
+                            <MdError
+                                className="
+                                    inline text-xl
+                                    text-red-500
+                                "
+                            />
+                            タイトルを追加してください。
+                        </div>
+                    )}
+                </div>
+            )}
             <fetcher.Form className="flex flex-col gap-4 items-center" method="post">
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="title">タイトル：</label>
@@ -119,6 +174,7 @@ export async function action({
         throw redirect('/login');
     }
     const errors = {
+        alreadyExists: false,
         category: false,
         title: false
     };
@@ -133,24 +189,45 @@ export async function action({
     if(!category) {
         errors.category = true;
     }
-    if(Object.values(errors).reduce((p, c) => p || c, false)) {
+    if(hasError(errors)) {
         return data({
             errors
         }, 400);
     }
-    const id = await db.prepare('insert into posts (body, category_id, description, title) values (?, ?, ?, ?)')
-        .bind('', category, description ?? '', title)
-        .run()
-        .then(() =>
-            db.prepare('select id from posts where rowid = last_insert_rowid()')
-                .first<Post['id']>('id')
-        );
-    if(0 < tags.length) {
-        const promises: Promise<unknown>[] = [];
-        for(const tag of tags) {
-            promises.push(db.prepare('insert into post_tags (post_id, tag_id) values (?, ?)').bind(id, tag).run());
+    try {
+        const id = await db.prepare('insert into posts (body, category_id, description, title) values (?, ?, ?, ?)')
+            .bind('', category, description ?? '', title)
+            .run()
+            .then(() =>
+                db.prepare('select id from posts where rowid = last_insert_rowid()')
+                    .first<Post['id']>('id')
+            );
+        if(0 < tags.length) {
+            const promises: Promise<unknown>[] = [];
+            for(const tag of tags) {
+                promises.push(db.prepare('insert into post_tags (post_id, tag_id) values (?, ?)').bind(id, tag).run());
+            }
+            await Promise.all(promises);
         }
-        await Promise.all(promises);
+        // noinspection ExceptionCaughtLocallyJS
+        throw redirect(`/posts/${id}/edit`);
+    } catch(err) {
+        // redirect
+        if(err instanceof Response) {
+            throw err;
+        }
+        if(err instanceof Error) {
+            if(err.message.startsWith('D1_ERROR: UNIQUE constraint failed:')) {
+                errors.alreadyExists = true;
+                return data({
+                    errors
+                }, 400);
+            }
+        }
+        throw new Error('Unexpected error');
     }
-    throw redirect(`/posts/${id}/edit`);
+}
+
+function hasError(errors: Record<string, boolean>) {
+    return Object.values(errors).reduce((p, c) => p || c, false);
 }
