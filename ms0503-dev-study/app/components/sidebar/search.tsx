@@ -41,11 +41,7 @@ export default function Search({
             `}
         >
             <input
-                className="
-                    border grow-0 px-3 py-2 rounded-lg shrink text-xl w-full
-                    bg-bg1 border-text
-                    dark:bg-bg1-dark dark:border-text-dark
-                "
+                className="bg-bg1 border border-text grow-0 px-3 py-2 rounded-lg shrink text-xl w-full"
                 onChange={handleQueryChange}
                 placeholder="記事名を検索..."
                 type="text"
@@ -55,12 +51,9 @@ export default function Search({
                 {results.map((result, i) => (
                     <NavLink
                         className={({ isActive }) => `
-                            block border overflow-ellipsis px-3 py-2 text-xl w-full
-                            text-text
+                            block border overflow-ellipsis px-3 py-2 text-text text-xl w-full
                             hover:bg-bg1
-                            dark:text-text-dark
-                            dark:hover:bg-bg1-dark
-                            ${isActive ? 'bg-bg1 dark:bg-bg1-dark' : ''}
+                            ${isActive ? 'bg-bg1' : ''}
                         `}
                         key={i}
                         to={getItemLink(type, result)}
