@@ -22,7 +22,7 @@
         "jiti": "^2"
     },
     "engines": {
-        "node": ">=21.0.0",
+        "node": ">=22.0.0",
         "npm": "use yarn instead",
         "pnpm": "use yarn instead",
         "yarn": ">=4.0.0"
