@@ -1,4 +1,5 @@
 import { data } from 'react-router';
+import { sessionStorage } from '~/services/auth.server';
 import type { Route } from './+types/search';
 import type {
     Category, Tag
