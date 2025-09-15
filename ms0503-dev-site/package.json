@@ -37,17 +37,17 @@
         "npm-run-all": "^4",
         "rimraf": "^6",
         "stylelint": "^16",
-        "stylelint-config-standard": "^38",
+        "stylelint-config-standard": "^39",
         "stylelint-declaration-block-no-ignored-properties": "^2",
-        "stylelint-order": "^6",
+        "stylelint-order": "^7",
         "tailwindcss": "^4",
         "typescript": "^5",
-        "vite": "^6",
+        "vite": "^7",
         "vite-tsconfig-paths": "^5",
         "wrangler": "^4"
     },
     "engines": {
-        "node": ">=21.0.0",
+        "node": ">=22.0.0",
         "npm": "use yarn instead",
         "pnpm": "use yarn instead",
         "yarn": ">=4.0.0"
