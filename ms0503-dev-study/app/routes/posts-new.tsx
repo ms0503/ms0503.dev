@@ -138,16 +138,19 @@ export async function action({
             errors
         }, 400);
     }
-    const post = await db.prepare('insert into posts (body, category_id, description, title) values (?, ?, ?, ?)')
+    const id = await db.prepare('insert into posts (body, category_id, description, title) values (?, ?, ?, ?)')
         .bind('', category, description ?? '', title)
-        .run<Post>()
-        .then(result => result.results[0]!);
+        .run()
+        .then(() =>
+            db.prepare('select id from posts where rowid = last_insert_rowid()')
+                .first<Post['id']>('id')
+        );
     if(0 < tags.length) {
         const promises: Promise<unknown>[] = [];
         for(const tag of tags) {
-            promises.push(db.prepare('insert into post_tags (post_id, tag_id) values (?, ?)').bind(post.id, tag).run());
+            promises.push(db.prepare('insert into post_tags (post_id, tag_id) values (?, ?)').bind(id, tag).run());
         }
         await Promise.all(promises);
     }
-    throw redirect(`/posts/${post.id}/edit`);
+    throw redirect(`/posts/${id}/edit`);
 }

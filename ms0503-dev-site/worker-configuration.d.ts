@@ -71,11 +71,11 @@ declare class DOMException extends Error {
      */
     readonly code: number;
 
+    constructor(message?: string, name?: string);
+
     get stack(): any;
 
     set stack(value: any);
-
-    constructor(message?: string, name?: string);
 }
 type WorkerGlobalScopeEventMap = {
     fetch: FetchEvent;
@@ -548,11 +548,11 @@ interface DurableObjectSetAlarmOptions {
     allowUnconfirmed?: boolean;
 }
 declare class WebSocketRequestResponsePair {
+    constructor(request: string, response: string);
+
     get request(): string;
 
     get response(): string;
-
-    constructor(request: string, response: string);
 }
 interface AnalyticsEngineDataset {
     writeDataPoint(event?: AnalyticsEngineDataPoint): void;
@@ -572,6 +572,8 @@ declare class Event {
     static readonly CAPTURING_PHASE: number;
     static readonly AT_TARGET: number;
     static readonly BUBBLING_PHASE: number;
+
+    constructor(type: string, init?: EventInit);
 
     /**
      * Returns the type of event, e.g. "click", "hashchange", or "submit".
@@ -671,8 +673,6 @@ declare class Event {
      */
     set cancelBubble(value: boolean);
 
-    constructor(type: string, init?: EventInit);
-
     /**
      * Invoking this method prevents event from reaching any registered event listeners after the current one finishes running and, when dispatched in a tree, also prevents event from reaching any other objects.
      *
@@ -767,14 +767,14 @@ interface EventTargetHandlerObject {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/AbortController)
  */
 declare class AbortController {
+    constructor();
+
     /**
      * Returns the AbortSignal object associated with this object.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/API/AbortController/signal)
      */
     get signal(): AbortSignal;
-
-    constructor();
 
     /**
      * Invoking this method will set this object's AbortSignal's aborted flag and signal to any observers that the associated activity is to be aborted.
@@ -834,14 +834,14 @@ declare abstract class ExtendableEvent extends Event {
 }
 /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/CustomEvent) */
 declare class CustomEvent<T = any> extends Event {
+    constructor(type: string, init?: CustomEventCustomEventInit);
+
     /**
      * Returns any custom data event was created with. Typically used for synthetic events.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/API/CustomEvent/detail)
      */
     get detail(): T;
-
-    constructor(type: string, init?: CustomEventCustomEventInit);
 }
 interface CustomEventCustomEventInit {
     bubbles?: boolean;
@@ -855,13 +855,13 @@ interface CustomEventCustomEventInit {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/Blob)
  */
 declare class Blob {
+    constructor(type?: ((ArrayBuffer | ArrayBufferView) | string | Blob)[], options?: BlobOptions);
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Blob/size) */
     get size(): number;
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Blob/type) */
     get type(): string;
-
-    constructor(type?: ((ArrayBuffer | ArrayBufferView) | string | Blob)[], options?: BlobOptions);
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/Blob/slice) */
     slice(start?: number, end?: number, type?: string): Blob;
@@ -883,13 +883,17 @@ interface BlobOptions {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/File)
  */
 declare class File extends Blob {
+    constructor(
+        bits: ((ArrayBuffer | ArrayBufferView) | string | Blob)[] | undefined,
+        name: string,
+        options?: FileOptions
+    );
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/File/name) */
     get name(): string;
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/File/lastModified) */
     get lastModified(): number;
-
-    constructor(bits: ((ArrayBuffer | ArrayBufferView) | string | Blob)[] | undefined, name: string, options?: FileOptions);
 }
 interface FileOptions {
     type?: string;
@@ -1100,9 +1104,9 @@ interface CryptoKeyArbitraryKeyAlgorithm {
 declare class DigestStream extends WritableStream<ArrayBuffer | ArrayBufferView> {
     readonly digest: Promise<ArrayBuffer>;
 
-    get bytesWritten(): number | bigint;
-
     constructor(algorithm: string | SubtleCryptoHashAlgorithm);
+
+    get bytesWritten(): number | bigint;
 }
 /**
  * A decoder for a specific method, that is a specific character encoding, like utf-8, iso-8859-2, koi8, cp1261, gbk, etc. A decoder takes a stream of bytes as input and emits a stream of code points. For a more scalable, non-native library, see StringView – a C-like representation of strings based on typed arrays.
@@ -1110,13 +1114,13 @@ declare class DigestStream extends WritableStream<ArrayBuffer | ArrayBufferView>
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/TextDecoder)
  */
 declare class TextDecoder {
+    constructor(label?: string, options?: TextDecoderConstructorOptions);
+
     get encoding(): string;
 
     get fatal(): boolean;
 
     get ignoreBOM(): boolean;
-
-    constructor(label?: string, options?: TextDecoderConstructorOptions);
 
     /**
      * Returns the result of running encoding's decoder. The method can be invoked zero or more times with options's stream set to true, and then once without options's stream (or set to false), to process a fragmented input. If the invocation without options's stream (or set to false) has no input, it's clearest to omit both arguments.
@@ -1141,9 +1145,9 @@ declare class TextDecoder {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/TextEncoder)
  */
 declare class TextEncoder {
-    get encoding(): string;
-
     constructor();
+
+    get encoding(): string;
 
     /**
      * Returns the result of running UTF-8's encoder.
@@ -1176,6 +1180,8 @@ interface TextEncoderEncodeIntoResult {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/ErrorEvent)
  */
 declare class ErrorEvent extends Event {
+    constructor(type: string, init?: ErrorEventErrorEventInit);
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/ErrorEvent/filename) */
     get filename(): string;
 
@@ -1190,8 +1196,6 @@ declare class ErrorEvent extends Event {
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/ErrorEvent/error) */
     get error(): any;
-
-    constructor(type: string, init?: ErrorEventErrorEventInit);
 }
 interface ErrorEventErrorEventInit {
     message?: string;
@@ -1873,9 +1877,9 @@ declare const ReadableStream: {
 };
 /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/ReadableStreamDefaultReader) */
 declare class ReadableStreamDefaultReader<R = any> {
-    get closed(): Promise<void>;
-
     constructor(stream: ReadableStream);
+
+    get closed(): Promise<void>;
 
     cancel(reason?: any): Promise<void>;
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/ReadableStreamDefaultReader/read) */
@@ -1885,9 +1889,9 @@ declare class ReadableStreamDefaultReader<R = any> {
 }
 /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/ReadableStreamBYOBReader) */
 declare class ReadableStreamBYOBReader {
-    get closed(): Promise<void>;
-
     constructor(stream: ReadableStream);
+
+    get closed(): Promise<void>;
 
     cancel(reason?: any): Promise<void>;
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/ReadableStreamBYOBReader/read) */
@@ -1981,10 +1985,10 @@ interface ReadableWritablePair<R = any, W = any> {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/WritableStream)
  */
 declare class WritableStream<W = any> {
+    constructor(underlyingSink?: UnderlyingSink, queuingStrategy?: QueuingStrategy);
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/WritableStream/locked) */
     get locked(): boolean;
-
-    constructor(underlyingSink?: UnderlyingSink, queuingStrategy?: QueuingStrategy);
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/WritableStream/abort) */
     abort(reason?: any): Promise<void>;
@@ -1999,6 +2003,8 @@ declare class WritableStream<W = any> {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/WritableStreamDefaultWriter)
  */
 declare class WritableStreamDefaultWriter<W = any> {
+    constructor(stream: WritableStream);
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/WritableStreamDefaultWriter/closed) */
     get closed(): Promise<void>;
 
@@ -2007,8 +2013,6 @@ declare class WritableStreamDefaultWriter<W = any> {
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/WritableStreamDefaultWriter/desiredSize) */
     get desiredSize(): number | null;
-
-    constructor(stream: WritableStream);
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/WritableStreamDefaultWriter/abort) */
     abort(reason?: any): Promise<void>;
@@ -2021,13 +2025,17 @@ declare class WritableStreamDefaultWriter<W = any> {
 }
 /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/TransformStream) */
 declare class TransformStream<I = any, O = any> {
+    constructor(
+        transformer?: Transformer<I, O>,
+        writableStrategy?: QueuingStrategy<I>,
+        readableStrategy?: QueuingStrategy<O>
+    );
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/TransformStream/readable) */
     get readable(): ReadableStream<O>;
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/TransformStream/writable) */
     get writable(): WritableStream<I>;
-
-    constructor(transformer?: Transformer<I, O>, writableStrategy?: QueuingStrategy<I>, readableStrategy?: QueuingStrategy<O>);
 }
 declare class FixedLengthStream extends IdentityTransformStream {
     constructor(expectedLength: number | bigint, queuingStrategy?: IdentityTransformStreamQueuingStrategy);
@@ -2051,19 +2059,19 @@ declare class DecompressionStream extends TransformStream<ArrayBuffer | ArrayBuf
 }
 /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/TextEncoderStream) */
 declare class TextEncoderStream extends TransformStream<string, Uint8Array> {
-    get encoding(): string;
-
     constructor();
+
+    get encoding(): string;
 }
 /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/TextDecoderStream) */
 declare class TextDecoderStream extends TransformStream<ArrayBuffer | ArrayBufferView, string> {
+    constructor(label?: string, options?: TextDecoderStreamTextDecoderStreamInit);
+
     get encoding(): string;
 
     get fatal(): boolean;
 
     get ignoreBOM(): boolean;
-
-    constructor(label?: string, options?: TextDecoderStreamTextDecoderStreamInit);
 }
 interface TextDecoderStreamTextDecoderStreamInit {
     fatal?: boolean;
@@ -2075,13 +2083,13 @@ interface TextDecoderStreamTextDecoderStreamInit {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/ByteLengthQueuingStrategy)
  */
 declare class ByteLengthQueuingStrategy implements QueuingStrategy<ArrayBufferView> {
+    constructor(init: QueuingStrategyInit);
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/ByteLengthQueuingStrategy/highWaterMark) */
     get highWaterMark(): number;
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/ByteLengthQueuingStrategy/size) */
     get size(): (chunk?: any) => number;
-
-    constructor(init: QueuingStrategyInit);
 }
 /**
  * This Streams API interface provides a built-in byte length queuing strategy that can be used when constructing streams.
@@ -2089,13 +2097,13 @@ declare class ByteLengthQueuingStrategy implements QueuingStrategy<ArrayBufferVi
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/CountQueuingStrategy)
  */
 declare class CountQueuingStrategy implements QueuingStrategy {
+    constructor(init: QueuingStrategyInit);
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/CountQueuingStrategy/highWaterMark) */
     get highWaterMark(): number;
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/CountQueuingStrategy/size) */
     get size(): (chunk?: any) => number;
-
-    constructor(init: QueuingStrategyInit);
 }
 interface QueuingStrategyInit {
     /**
@@ -2215,6 +2223,8 @@ interface UnsafeTraceMetrics {
  * [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL)
  */
 declare class URL {
+    constructor(url: string | URL, base?: string | URL);
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/origin) */
     get origin(): string;
 
@@ -2281,8 +2291,6 @@ declare class URL {
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/searchParams) */
     get searchParams(): URLSearchParams;
 
-    constructor(url: string | URL, base?: string | URL);
-
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL/canParse_static) */
     static canParse(url: string, base?: string): boolean;
 
@@ -2303,10 +2311,10 @@ declare class URL {
 }
 /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/URLSearchParams) */
 declare class URLSearchParams {
+    constructor(init?: (Iterable<Iterable<string>> | Record<string, string> | string));
+
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/URLSearchParams/size) */
     get size(): number;
-
-    constructor(init?: (Iterable<Iterable<string>> | Record<string, string> | string));
 
     /**
      * Appends a specified key/value pair as a new search parameter.
@@ -2364,6 +2372,12 @@ declare class URLSearchParams {
     ]>;
 }
 declare class URLPattern {
+    constructor(
+        input?: (string | URLPatternInit),
+        baseURL?: (string | URLPatternOptions),
+        patternOptions?: URLPatternOptions
+    );
+
     get protocol(): string;
 
     get username(): string;
@@ -2381,8 +2395,6 @@ declare class URLPattern {
     get hash(): string;
 
     get hasRegExpGroups(): boolean;
-
-    constructor(input?: (string | URLPatternInit), baseURL?: (string | URLPatternOptions), patternOptions?: URLPatternOptions);
 
     test(input?: (string | URLPatternInit), baseURL?: string): boolean;
     exec(input?: (string | URLPatternInit), baseURL?: string): URLPatternResult | null;
@@ -2613,6 +2625,8 @@ declare class EventSource extends EventTarget {
     static readonly OPEN: number;
     static readonly CLOSED: number;
 
+    constructor(url: string, init?: EventSourceEventSourceInit);
+
     /**
      * Returns the URL providing the event stream.
      *
@@ -2651,8 +2665,6 @@ declare class EventSource extends EventTarget {
 
     /* [MDN Reference](https://developer.mozilla.org/docs/Web/API/EventSource/error_event) */
     set onerror(value: any | null);
-
-    constructor(url: string, init?: EventSourceEventSourceInit);
 
     static from(stream: ReadableStream): EventSource;
 
