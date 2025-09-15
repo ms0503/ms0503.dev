@@ -37,7 +37,7 @@
         "npm-run-all": "^4",
         "rimraf": "^6",
         "stylelint": "^16",
-        "stylelint-config-standard": "^38",
+        "stylelint-config-standard": "^39",
         "stylelint-declaration-block-no-ignored-properties": "^2",
         "stylelint-order": "^6",
         "tailwindcss": "^4",
