@@ -13,11 +13,7 @@ export default function EditPost({ loaderData }: Route.ComponentProps) {
         <div className="-m-6 flex flex-row h-screen">
             <BodyEditor className="grow h-full p-6 shrink" loaderData={loaderData} />
             <MetadataEditor
-                className="
-                    border-l grow-0 h-full p-6 shrink w-1/4
-                    border-text
-                    dark:border-text-dark
-                "
+                className="border-l border-text grow-0 h-full p-6 shrink w-1/4"
                 loaderData={loaderData}
             />
         </div>
@@ -44,22 +40,15 @@ function BodyEditor({
                 <input name="type" type="hidden" value="body" />
                 <div className="flex flex-col gap-2 h-full w-full">
                     <textarea
-                        className="
-                            border h-full overflow-x-clip overflow-y-scroll px-3 py-2 rounded-md text-lg
-                            border-text
-                            dark:border-text-dark
-                        "
+                        className="border border-text h-full overflow-x-clip overflow-y-scroll px-3 py-2 rounded-md text-lg"
                         defaultValue={post.body}
                         name="body"
                     />
                 </div>
                 <button
                     className="
-                        px-8 py-2 rounded-xl text-lg transition-colors w-fit
-                        bg-bg-dark text-text-dark
-                        hover:bg-bg2-dark
-                        dark:bg-bg dark:text-text
-                        dark:hover:bg-bg2
+                        bg-text px-8 py-2 rounded-xl text-bg text-lg transition-colors w-fit
+                        hover:bg-bg2
                     "
                     type="submit"
                 >
@@ -87,11 +76,7 @@ function MetadataEditor({
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="title">タイトル：</label>
                     <input
-                        className="
-                            border rounded-md
-                            border-text
-                            dark:border-text-dark
-                        "
+                        className="border border-text rounded-md"
                         defaultValue={post.title}
                         name="title"
                         type="text"
@@ -100,11 +85,7 @@ function MetadataEditor({
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="description">概要(省略可)：</label>
                     <input
-                        className="
-                            border rounded-md
-                            border-text
-                            dark:border-text-dark
-                        "
+                        className="border border-text rounded-md"
                         defaultValue={post.description}
                         name="description"
                         type="text"
@@ -113,11 +94,7 @@ function MetadataEditor({
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="category">カテゴリー：</label>
                     <select
-                        className="
-                            appearance-none border px-3 py-2 rounded-md
-                            border-text
-                            dark:border-text-dark
-                        "
+                        className="appearance-none border border-text px-3 py-2 rounded-md"
                         name="category"
                     >
                         {categories.map(category => (
@@ -130,11 +107,7 @@ function MetadataEditor({
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="tags">タグ：</label>
                     <select
-                        className="
-                            appearance-none border px-3 py-2 rounded-md
-                            border-text
-                            dark:border-text-dark
-                        "
+                        className="appearance-none border border-text px-3 py-2 rounded-md"
                         multiple
                         name="tags"
                     >
@@ -147,11 +120,8 @@ function MetadataEditor({
                 </div>
                 <button
                     className="
-                        px-8 py-2 rounded-xl text-lg transition-colors w-fit
-                        bg-bg-dark text-text-dark
-                        hover:bg-bg2-dark
-                        dark:bg-bg dark:text-text
-                        dark:hover:bg-bg2
+                        bg-text px-8 py-2 rounded-xl text-bg text-lg transition-colors w-fit
+                        hover:bg-bg2
                     "
                     type="submit"
                 >

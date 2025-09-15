@@ -20,12 +20,9 @@ export default function Sidebar({ className }: SidebarProps) {
         >
             <NavLink
                 className={({ isActive }) => `
-                    block border overflow-ellipsis px-3 py-2 text-xl w-full
-                    text-text
+                    block border overflow-ellipsis px-3 py-2 text-text text-xl w-full
                     hover:bg-bg1
-                    dark:text-text-dark
-                    dark:hover:bg-bg1-dark
-                    ${isActive ? 'bg-bg1 dark:bg-bg1-dark' : ''}
+                    ${isActive ? 'bg-bg1' : ''}
                 `}
                 onClick={() => setType('posts')}
                 onKeyDown={() => setType('posts')}
@@ -35,12 +32,9 @@ export default function Sidebar({ className }: SidebarProps) {
             </NavLink>
             <NavLink
                 className={({ isActive }) => `
-                    block border overflow-ellipsis px-3 py-2 text-xl w-full
-                    text-text
+                    block border overflow-ellipsis px-3 py-2 text-text text-xl w-full
                     hover:bg-bg1
-                    dark:text-text-dark
-                    dark:hover:bg-bg1-dark
-                    ${isActive ? 'bg-bg1 dark:bg-bg1-dark' : ''}
+                    ${isActive ? 'bg-bg1' : ''}
                 `}
                 onClick={() => setType('images')}
                 onKeyDown={() => setType('images')}
@@ -58,11 +52,7 @@ export default function Sidebar({ className }: SidebarProps) {
                 to="/posts/new"
             >
                 <button
-                    className="
-                        cursor-pointer flex flex-row gap-2 items-center justify-center px-5 py-3 rounded-3xl text-xl
-                        bg-bg-dark text-text-dark
-                        dark:bg-bg dark:text-text
-                    "
+                    className="bg-text cursor-pointer flex flex-row gap-2 items-center justify-center px-5 py-3 rounded-3xl text-bg text-xl"
                     type="button"
                 >
                     <MdAdd className="inline text-3xl" />

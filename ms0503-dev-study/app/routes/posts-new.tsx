@@ -21,50 +21,20 @@ export default function NewPosts({ loaderData: {
             {data && hasError(data.errors) && (
                 <div className="flex flex-col my-4 w-full">
                     {data.errors.alreadyExists && (
-                        <div
-                            className="
-                                border-2 flex flex-row gap-1 items-center px-3 py-2 rounded-lg
-                                bg-red-950 border-red-700
-                            "
-                        >
-                            <MdError
-                                className="
-                                    inline text-xl
-                                    text-red-500
-                                "
-                            />
+                        <div className="bg-red-950 border-2 border-red-700 flex flex-row gap-1 items-center px-3 py-2 rounded-lg">
+                            <MdError className="inline text-red-500 text-xl" />
                             既に記事が存在しています。
                         </div>
                     )}
                     {data.errors.category && (
-                        <div
-                            className="
-                                border-2 flex flex-row gap-1 items-center px-3 py-2 rounded-lg
-                                bg-red-950 border-red-700
-                            "
-                        >
-                            <MdError
-                                className="
-                                    inline text-xl
-                                    text-red-500
-                                "
-                            />
+                        <div className="bg-red-950 border-2 border-red-700 flex flex-row gap-1 items-center px-3 py-2 rounded-lg">
+                            <MdError className="inline text-red-500 text-xl" />
                             カテゴリーを指定してください。
                         </div>
                     )}
                     {data.errors.title && (
-                        <div
-                            className="
-                                border-2 flex flex-row gap-1 items-center px-3 py-2 rounded-lg
-                                bg-red-950 border-red-600
-                            "
-                        >
-                            <MdError
-                                className="
-                                    inline text-xl
-                                    text-red-500
-                                "
-                            />
+                        <div className="bg-red-950 border-2 border-red-700 flex flex-row gap-1 items-center px-3 py-2 rounded-lg">
+                            <MdError className="inline text-red-500 text-xl" />
                             タイトルを追加してください。
                         </div>
                     )}
@@ -74,11 +44,7 @@ export default function NewPosts({ loaderData: {
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="title">タイトル：</label>
                     <input
-                        className="
-                            border rounded-md
-                            border-text
-                            dark:border-text-dark
-                        "
+                        className="border border-text rounded-md"
                         name="title"
                         type="text"
                     />
@@ -86,11 +52,7 @@ export default function NewPosts({ loaderData: {
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="description">概要(省略可)：</label>
                     <input
-                        className="
-                            border rounded-md
-                            border-text
-                            dark:border-text-dark
-                        "
+                        className="border border-text rounded-md"
                         name="description"
                         type="text"
                     />
@@ -98,11 +60,7 @@ export default function NewPosts({ loaderData: {
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="category">カテゴリー：</label>
                     <select
-                        className="
-                            appearance-none border px-3 py-2 rounded-md
-                            border-text
-                            dark:border-text-dark
-                        "
+                        className="appearance-none border border-text px-3 py-2 rounded-md"
                         name="category"
                     >
                         {categories.map(category => (
@@ -115,11 +73,7 @@ export default function NewPosts({ loaderData: {
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="tags">タグ：</label>
                     <select
-                        className="
-                            appearance-none border px-3 py-2 rounded-md
-                            border-text
-                            dark:border-text-dark
-                        "
+                        className="appearance-none border border-text px-3 py-2 rounded-md"
                         multiple
                         name="tags"
                     >
@@ -132,11 +86,8 @@ export default function NewPosts({ loaderData: {
                 </div>
                 <button
                     className="
-                        px-8 py-2 rounded-xl text-lg transition-colors w-fit
-                        bg-bg-dark text-text-dark
-                        hover:bg-bg2-dark
-                        dark:bg-bg dark:text-text
-                        dark:hover:bg-bg2
+                        bg-text px-8 py-2 rounded-xl text-bg text-lg transition-colors w-fit
+                        hover:bg-bg2
                     "
                     type="submit"
                 >
