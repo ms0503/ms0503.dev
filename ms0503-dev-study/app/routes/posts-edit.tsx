@@ -1,13 +1,15 @@
 import {
     data, redirect, useFetcher
 } from 'react-router';
-import { snakeKeyToLowerCamelKey } from '~/lib/map';
+import {
+    hasTrueRecord, snakeKeyToLowerCamelKey
+} from '~/lib/map';
 import { sessionStorage } from '~/services/auth.server';
-import type { PropsWithClassName } from '../lib/types';
 import type { Route } from './+types/posts-edit';
 import type {
     Category, Post, PostTag, Raw, Tag
 } from 'ms0503-dev-db';
+import type { PropsWithClassName } from '~/lib/types';
 
 export default function EditPost({ loaderData }: Route.ComponentProps) {
     return (
@@ -96,11 +98,11 @@ function MetadataEditor({
                     <label htmlFor="category">カテゴリー：</label>
                     <select
                         className="appearance-none border border-text px-3 py-2 rounded-md"
-                        defaultValue={post.categoryId}
+                        defaultValue={post.categoryId.toString(10)}
                         name="category"
                     >
                         {categories.map(category => (
-                            <option key={category.id} value={category.id}>
+                            <option key={category.id} value={category.id.toString(10)}>
                                 {category.name}
                             </option>
                         ))}
@@ -110,11 +112,12 @@ function MetadataEditor({
                     <label htmlFor="tags">タグ：</label>
                     <select
                         className="appearance-none border border-text px-3 py-2 rounded-md"
+                        defaultValue={postTags.map(id => id.toString(10))}
                         multiple
                         name="tags"
                     >
                         {tags.map(tag => (
-                            <option key={tag.id} selected={postTags.includes(tag.id)} value={tag.id}>
+                            <option key={tag.id} value={tag.id.toString(10)}>
                                 {tag.name}
                             </option>
                         ))}
@@ -212,7 +215,7 @@ export async function action({
             if(!category) {
                 errors.category = true;
             }
-            if(Object.values(errors).reduce((p, c) => p || c, false)) {
+            if(hasTrueRecord(errors)) {
                 return data({
                     errors
                 }, 400);

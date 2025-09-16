@@ -2,6 +2,7 @@ import { MdError } from 'react-icons/md';
 import {
     data, redirect, useFetcher
 } from 'react-router';
+import { hasTrueRecord } from '~/lib/map';
 import { sessionStorage } from '~/services/auth.server';
 import type { Route } from './+types/posts-new';
 import type {
@@ -18,7 +19,7 @@ export default function NewPosts({ loaderData: {
     return (
         <>
             <h1>記事を作成する</h1>
-            {data && hasError(data.errors) && (
+            {data && hasTrueRecord(data.errors) && (
                 <div className="flex flex-col my-4 w-full">
                     {data.errors.alreadyExists && (
                         <div className="bg-red-950 border-2 border-red-700 flex flex-row gap-1 items-center px-3 py-2 rounded-lg">
@@ -140,7 +141,7 @@ export async function action({
     if(!category) {
         errors.category = true;
     }
-    if(hasError(errors)) {
+    if(hasTrueRecord(errors)) {
         return data({
             errors
         }, 400);
@@ -177,8 +178,4 @@ export async function action({
         }
         throw new Error('Unexpected error');
     }
-}
-
-function hasError(errors: Record<string, boolean>) {
-    return Object.values(errors).reduce((p, c) => p || c, false);
 }
