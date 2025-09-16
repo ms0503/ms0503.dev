@@ -2,6 +2,7 @@ import { use } from 'react';
 import {
     data, redirect
 } from 'react-router';
+import { sessionStorage } from '~/services/auth.server';
 import type { Route } from './+types/images-view';
 
 export default function ImagesView({ loaderData: {
