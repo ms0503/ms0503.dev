@@ -251,6 +251,7 @@ export const rules: ESLintConfigParts = _ => [
                 {
                     anonymous: 'never',
                     asyncArrow: 'always',
+                    catch: 'never',
                     named: 'never'
                 }
             ],
