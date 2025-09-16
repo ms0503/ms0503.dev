@@ -1,11 +1,12 @@
 import {
     data, redirect, useFetcher
 } from 'react-router';
+import { snakeKeyToLowerCamelKey } from '~/lib/map';
 import { sessionStorage } from '~/services/auth.server';
 import type { PropsWithClassName } from '../lib/types';
 import type { Route } from './+types/posts-edit';
 import type {
-    Category, Post, PostTag, Tag
+    Category, Post, PostTag, Raw, Tag
 } from 'ms0503-dev-db';
 
 export default function EditPost({ loaderData }: Route.ComponentProps) {
@@ -95,10 +96,11 @@ function MetadataEditor({
                     <label htmlFor="category">カテゴリー：</label>
                     <select
                         className="appearance-none border border-text px-3 py-2 rounded-md"
+                        defaultValue={post.categoryId}
                         name="category"
                     >
                         {categories.map(category => (
-                            <option key={category.id} selected={post.categoryId === category.id} value={category.id}>
+                            <option key={category.id} value={category.id}>
                                 {category.name}
                             </option>
                         ))}
@@ -143,21 +145,24 @@ export async function loader({
         throw redirect('/login');
     }
     if(!id) {
-        throw data(null, {
-            status: 404
-        });
+        throw data(null, 404);
     }
-    const categories = db.prepare('select * from categories').all<Category>().then(result => result.results);
-    const tags = db.prepare('select * from tags').all<Tag>().then(result => result.results);
+    const categories = db.prepare('select * from categories')
+        .all<Category>()
+        .then(result => result.results);
+    const tags = db.prepare('select * from tags')
+        .all<Tag>()
+        .then(result => result.results);
     const postTags = db.prepare('select tag_id from post_tags where post_id = ?')
         .bind(id)
         .all<PostTag['tagId']>()
         .then(result => result.results);
-    const post = await db.prepare('select * from posts where id = ?').bind(id).first<Post>();
+    const post = await db.prepare('select * from posts where id = ?')
+        .bind(id)
+        .first<Raw.Post>()
+        .then(raw => raw && snakeKeyToLowerCamelKey<Post>(raw));
     if(!post) {
-        throw data(null, {
-            status: 404
-        });
+        throw data(null, 404);
     }
     return {
         categories: await categories,
