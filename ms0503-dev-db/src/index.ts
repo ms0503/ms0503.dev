@@ -10,6 +10,7 @@ export namespace Raw {
         created_at: `${number}-${number}-${number}`,
         description: string,
         id: number,
+        is_published: boolean,
         title: string,
         updated_at: `${number}-${number}-${number}`
     };
@@ -36,6 +37,7 @@ export type Post = {
     createdAt: Raw.Post['created_at'],
     description: Raw.Post['description'],
     id: Raw.Post['id'],
+    isPublished: Raw.Post['is_published'],
     title: Raw.Post['title'],
     updatedAt: Raw.Post['updated_at']
 };
