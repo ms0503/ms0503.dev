@@ -55,7 +55,7 @@ function BodyEditor({
                     "
                     type="submit"
                 >
-                    公開
+                    更新
                 </button>
             </fetcher.Form>
         </div>
@@ -123,6 +123,10 @@ function MetadataEditor({
                         ))}
                     </select>
                 </div>
+                <div className="flex flex-row gap-2 w-full">
+                    <label htmlFor="isPublished">公開：</label>
+                    <input defaultChecked={post.isPublished} name="isPublished" type="checkbox" />
+                </div>
                 <button
                     className="
                         bg-text px-8 py-2 rounded-xl text-bg text-lg transition-colors w-fit
@@ -130,7 +134,7 @@ function MetadataEditor({
                     "
                     type="submit"
                 >
-                    公開
+                    更新
                 </button>
             </fetcher.Form>
         </div>
@@ -199,6 +203,7 @@ export async function action({
     const title = formData.get('title');
     const description = formData.get('description');
     const category = formData.get('category');
+    const isPublished = formData.get('isPublished');
     const tags = (
         formData.getAll('tags') as string[]
     ).map(tag => parseInt(tag, 10)).sort();
@@ -223,8 +228,8 @@ export async function action({
             const promises: Promise<unknown>[] = [];
             promises.push(
                 db.prepare(
-                    'update posts set category_id = ?, description = ?, title = ?, updated_at = (strftime(\'%Y-%m-%d\', \'now\')) where id = ?')
-                    .bind(category, description ?? '', title, id)
+                    'update posts set category_id = ?, description = ?, is_published = ?, title = ?, updated_at = (strftime(\'%Y-%m-%d\', \'now\')) where id = ?')
+                    .bind(category, description ?? '', isPublished ? 1 : 0, title, id)
                     .run()
             );
             const oldTags = await db.prepare('select tag_id from post_tags where post_id = ? order by tag_id asc')
